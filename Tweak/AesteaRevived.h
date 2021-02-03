@@ -11,6 +11,7 @@ extern BOOL enabled;
 
 BOOL colorOnStateSwitch = YES;
 BOOL colorOffStateSwitch = NO;
+static BOOL reallyDisableTogglesOnTap;
 
 UIViewController* ancestor;
 NSDictionary* preferencesDictionary;
@@ -65,4 +66,22 @@ NSString* hotspotOffColorValue = @"#147efb";
 
 @interface SBIconController : UIViewController
 - (void)viewDidAppear:(BOOL)animated;
+@end
+
+@interface CCUILabeledRoundButton
+@property(nonatomic, copy, readwrite) NSString *title;
+@end
+
+@interface SBWiFiManager
+- (id)sharedInstance;
+- (void)setWiFiEnabled: (BOOL)enabled;
+- (bool)wiFiEnabled;
+@end
+
+@interface BluetoothManager
+- (id)sharedInstance;
+- (void)setEnabled: (BOOL)enabled;
+- (bool)enabled;
+- (void)setPowered: (BOOL)powered;
+- (bool)powered;
 @end

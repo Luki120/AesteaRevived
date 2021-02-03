@@ -1,10 +1,17 @@
 #import "AesteaRevived.h"
 
+
 BOOL enabled;
+
+
+static BOOL bluetoothEnabled;
+
 
 %group AesteaRevived
 
+
 %hook CCUIRoundButton
+
 
 - (void)didMoveToWindow {
 
@@ -70,7 +77,78 @@ BOOL enabled;
 
 %end
 
+
+
+
+// Credits to the original creator of the tweak: https://github.com/jakeajames/RealCC
+
+
+%hook CCUILabeledRoundButton
+
+
+- (void)buttonTapped: (id)arg1 {
+
+
+	%orig;
+
+	if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WIFI_NAME" value: @"CONTROL_CENTER_STATUS_WIFI_NAME" table: @"Localizable"]] 
+		|| [self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WLAN_NAME" value: @"CONTROL_CENTER_STATUS_WLAN_NAME" table: @"Localizable"]]) {
+			SBWiFiManager *wifiManager = (SBWiFiManager*)[%c(SBWiFiManager) sharedInstance];
+		if([wifiManager wiFiEnabled])
+			[wifiManager setWiFiEnabled: NO];
+		}
+
+		if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" value: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" table: @"Localizable"]]) {
+			BluetoothManager *bluetoothManager = (BluetoothManager*)[%c(BluetoothManager) sharedInstance];
+			BOOL enabled = [bluetoothManager enabled];
+
+			if(enabled) {
+
+				[bluetoothManager setEnabled: NO];
+				[bluetoothManager setPowered: NO];
+
+				bluetoothEnabled = NO;
+			}
+
+			else
+				bluetoothEnabled = YES;
+
+		}
+	}
+
 %end
+
+
+
+
+%hook BluetoothManager
+
+
+-(BOOL)enabled {
+
+	bluetoothEnabled = !%orig;
+	return %orig;
+
+}
+
+-(BOOL)setEnabled:(BOOL)arg1 {
+
+	return %orig(bluetoothEnabled);
+
+}
+
+-(BOOL)setPowered:(BOOL)arg1 {
+
+	return %orig(bluetoothEnabled);
+
+}
+
+
+%end
+%end
+
+
+
 
 %ctor {
 
@@ -127,6 +205,8 @@ BOOL enabled;
 	[preferences registerObject:&bluetoothOffColorValue default:@"147efb" forKey:@"offBluetoothColor"];
 	[preferences registerObject:&airdropOffColorValue default:@"147efb" forKey:@"offAirdropColor"];
 	[preferences registerObject:&hotspotOffColorValue default:@"147efb" forKey:@"offHotspotColor"];
+
+	
 
 	if (enabled) {
 		%init(AesteaRevived);

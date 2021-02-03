@@ -4,6 +4,7 @@ TARGET = iphone:clang:latest:latest
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = AesteaPrefs
+
 $(BUNDLE_NAME)_FILES = $(wildcard *.m)
 $(BUNDLE_NAME)_INSTALL_PATH = /Library/PreferenceBundles
 $(BUNDLE_NAME)_FRAMEWORKS = UIKit

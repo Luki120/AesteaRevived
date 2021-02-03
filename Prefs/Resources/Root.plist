@@ -401,14 +401,14 @@
 		<dict>
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
-			<key>label</key>
-			<string>Dress</string>
-			<key>subtitle</key>
-			<string>Dress Up Your Lockscreen</string>
 			<key>icon</key>
-			<string>Dress.png</string>
+			<string>PerfectSpotify.png</string>
+			<key>label</key>
+			<string>PerfectSpotify</string>
+			<key>subtitle</key>
+			<string>Fully customize your listening experience</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/drs/</string>
+			<string>https://parcility.co/package/com.twickd.luki120.perfectspotify/twickd</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -463,7 +463,17 @@ Maintained By Luki</string>
 			<key>subtitle</key>
 			<string>GitHub 🌊</string>
 			<key>url</key>
-			<string>https://github.com/Litteeen/Aestea</string>
+			<string>https://github.com/Luki120/AesteaRevived</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Discord</string>
+			<key>subtitle</key>
+			<string>Chat with us</string>
+			<key>url</key>
+			<string>https://discord.gg/MtmMxRVjXV</string>
 		</dict>
 
 		<dict>
@@ -479,6 +489,6 @@ Maintained By Luki</string>
 
 	</array>
 	<key>title</key>
-	<string>Aestea</string>
+	<string>Aestea Revived</string>
 </dict>
 </plist>
