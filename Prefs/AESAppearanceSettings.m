@@ -44,4 +44,11 @@
     
 }
 
+
+-(HBAppearanceSettingsLargeTitleStyle)largeTitleStyle {
+    
+    return HBAppearanceSettingsLargeTitleStyleNever;
+
+}
+
 @end

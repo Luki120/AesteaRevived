@@ -25,7 +25,7 @@ BOOL enabled = NO;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,10,10)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"1.0";
+        self.titleLabel.text = @"2.0";
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem.titleView addSubview:self.titleLabel];
@@ -248,6 +248,36 @@ BOOL enabled = NO;
     [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Aestea"]];
 
     posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char *const *)args, NULL);
+
+}
+
+@end
+
+
+@implementation EnabledToggleColorsRootListController
+
+-(NSArray *)specifiers {
+
+	if (_specifiers == nil) {
+		_specifiers = [[self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self] retain];
+	}
+
+	return _specifiers;
+
+}
+
+@end
+
+
+@implementation DisabledToggleColorsRootListController
+
+-(NSArray *)specifiers {
+
+	if (_specifiers == nil) {
+		_specifiers = [[self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self] retain];
+	}
+
+	return _specifiers;
 
 }
 

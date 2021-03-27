@@ -13,7 +13,7 @@
 @interface AESRootListController : HBRootListController {
     UITableView * _table;
 }
-@property(nonatomic, retain)UISwitch* enableSwitch;
+@property (nonatomic, retain) UISwitch* enableSwitch;
 @property (nonatomic, retain) UIView *headerView;
 @property (nonatomic, retain) UIImageView *headerImageView;
 @property (nonatomic, retain) UILabel *titleLabel;
@@ -24,4 +24,12 @@
 - (void)resetPreferences;
 - (void)respring;
 - (void)respringUtil;
+@end
+
+
+@interface EnabledToggleColorsRootListController : PSListController
+@end
+
+
+@interface DisabledToggleColorsRootListController : PSListController
 @end

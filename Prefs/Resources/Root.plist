@@ -23,329 +23,27 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>EnabledToggleColorsRootListController</string>
+			<key>isController</key>
+			<true/>
 			<key>label</key>
 			<string>Enabled Toggle Colors</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>DisabledToggleColorsRootListController</string>
+			<key>isController</key>
 			<true/>
-			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
-			<key>key</key>
-			<string>colorOnState</string>
-			<key>label</key>
-			<string>Enable On State Coloring</string>
-			<key>PostNotification</key>
-			<string>love.litten.aesteapreferences/ReloadPrefs</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>airplaneColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Airplane</string>
-			<key>key</key>
-			<string>airplaneColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>cellularColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Cellular</string>
-			<key>key</key>
-			<string>cellularColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>wifiColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Wifi</string>
-			<key>key</key>
-			<string>wifiColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>bluetoothColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Bluetooth</string>
-			<key>key</key>
-			<string>bluetoothColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>airdropColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>AirDrop</string>
-			<key>key</key>
-			<string>airdropColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>hotspotColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Hotspot</string>
-			<key>key</key>
-			<string>hotspotColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Disabled Toggle Colors</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
-			<key>key</key>
-			<string>colorOffState</string>
-			<key>label</key>
-			<string>Enable On State Coloring</string>
-			<key>PostNotification</key>
-			<string>love.litten.aesteapreferences/ReloadPrefs</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offAirplaneColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Airplane</string>
-			<key>key</key>
-			<string>offAirplaneColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offCellularColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Cellular</string>
-			<key>key</key>
-			<string>offCellularColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offWifiColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Wifi</string>
-			<key>key</key>
-			<string>offWifiColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offBluetoothColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Bluetooth</string>
-			<key>key</key>
-			<string>offBluetoothColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offAirdropColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>AirDrop</string>
-			<key>key</key>
-			<string>offAirdropColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>love.litten.aestea.colorspreferences</string>
-				<key>key</key>
-				<string>offHotspotColor</string>
-				<key>fallback</key>
-				<string>#147efb</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Hotspot</string>
-			<key>key</key>
-			<string>offHotspotColor</string>
-			<key>PostNotification</key>
-			<string>love.litten.aestea.colorspreferences/ReloadPrefs</string>
 		</dict>
 
 		<dict>
@@ -375,7 +73,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>Thanks kritanta For The Pretty Twitter Cells</string>
+			<string>Thanks Kritanta For The Pretty Twitter Cells</string>
 			<key>isStaticText</key>
 			<true/>
 		</dict>
