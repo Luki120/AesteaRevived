@@ -1,5 +1,3 @@
-![download](https://i.imgur.com/lN0gaZ2.png)
-
 # Aestea Revived
 
 ## This tweak was compiled, reuploaded, and is currently maintained as a tribute, please read.
