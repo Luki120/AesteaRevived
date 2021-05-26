@@ -5,7 +5,7 @@
 #import <Cephei/HBPreferences.h>
 #import <Cephei/HBRespringController.h>
 #import <spawn.h>
-#import "SparkColourPickerUtils.h"
+
 
 @interface AESAppearanceSettings : HBAppearanceSettings
 @end

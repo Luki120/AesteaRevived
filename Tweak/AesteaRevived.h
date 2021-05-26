@@ -1,82 +1,78 @@
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import <Cephei/HBPreferences.h>
-#import "SparkColourPickerUtils.h"
+
+#import "GcColorPickerUtils.h"
+
 
 // Utils
+
 HBPreferences* preferences;
 
-// Option Switches
-extern BOOL enabled;
 
+// Prefs variables
+
+BOOL enabled;
 BOOL colorOnStateSwitch = YES;
-BOOL colorOffStateSwitch = NO;
+
+
+static BOOL colorAirplaneDisabledState;
+static BOOL colorCellularDisabledState;
+static BOOL colorWiFiDisabledState;
+static BOOL colorBluetoothDisabledState;
+static BOOL colorAirdropDisabledState;
+static BOOL colorHotspotDisabledState;
+
+
+static BOOL bluetoothEnabled;
 static BOOL reallyDisableTogglesOnTap;
 
+
 UIViewController* ancestor;
-NSDictionary* preferencesDictionary;
 
-NSString* colorAirplaneString;
-UIColor* colorAirplane;
-NSString* colorCellularString;
-UIColor* colorCellular;
-NSString* colorWifiString;
-UIColor* colorWifi;
-NSString* colorBluetoothString;
-UIColor* colorBluetooth;
-NSString* colorAirdropString;
-UIColor* colorAirDrop;
-NSString* colorHoptspotString;
-UIColor* colorHotspot;
 
-NSString* offColorAirplaneString;
-UIColor* offColorAirplane;
-NSString* offColorCellularString;
-UIColor* offColorCellular;
-NSString* offColorWifiString;
-UIColor* offColorWifi;
-NSString* offColorBluetoothString;
-UIColor* offColorBluetooth;
-NSString* offColorAirdropString;
-UIColor* offColorAirDrop;
-NSString* offColorHoptspotString;
-UIColor* offColorHotspot;
+// Colors
 
-// Storing The ColorPicker Values
-NSString* airplaneColorValue = @"#147efb";
-NSString* cellularColorValue = @"#147efb";
-NSString* wifiColorValue = @"#147efb";
-NSString* bluetoothColorValue = @"#147efb";
-NSString* airdropColorValue = @"#147efb";
-NSString* hotspotColorValue = @"#147efb";
+NSString* airplaneColor = @"ff9f0a";
+NSString* cellularColor = @"30d158";
+NSString* wifiColor = @"147efb";
+NSString* bluetoothColor = @"147efb";
+NSString* airdropColor = @"147efb";
+NSString* hotspotColor = @"30d158";
 
-NSString* airplaneOffColorValue = @"#147efb";
-NSString* cellularOffColorValue = @"#147efb";
-NSString* wifiOffColorValue = @"#147efb";
-NSString* bluetoothOffColorValue = @"#147efb";
-NSString* airdropOffColorValue = @"#147efb";
-NSString* hotspotOffColorValue = @"#147efb";
+
+NSString* offAirplaneColor = @"147efb";
+NSString* offCellularColor = @"147efb";
+NSString* offWiFiColor = @"147efb";
+NSString* offBluetoothColor = @"147efb";
+NSString* offAirdropColor = @"147efb";
+NSString* offHotspotColor = @"147efb";
+
 
 // Interfaces
+
 @interface CCUIRoundButton : UIControl
-@property (nonatomic,retain)UIView* normalStateBackgroundView; 
-@property(nonatomic, retain)UIView* selectedStateBackgroundView;
+@property (nonatomic, retain) UIView* normalStateBackgroundView; 
+@property (nonatomic, retain) UIView* selectedStateBackgroundView;
 - (id)_viewControllerForAncestor;
 @end
+
 
 @interface SBIconController : UIViewController
 - (void)viewDidAppear:(BOOL)animated;
 @end
 
+
 @interface CCUILabeledRoundButton
 @property(nonatomic, copy, readwrite) NSString *title;
 @end
+
 
 @interface SBWiFiManager
 - (id)sharedInstance;
 - (void)setWiFiEnabled: (BOOL)enabled;
 - (bool)wiFiEnabled;
 @end
+
 
 @interface BluetoothManager
 - (id)sharedInstance;

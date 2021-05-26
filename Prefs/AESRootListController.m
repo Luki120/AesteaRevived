@@ -25,7 +25,7 @@ BOOL enabled = NO;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,10,10)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"2.0";
+        self.titleLabel.text = @"3.0";
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem.titleView addSubview:self.titleLabel];
@@ -53,11 +53,12 @@ BOOL enabled = NO;
 
 -(NSArray *)specifiers {
 
-	if (_specifiers == nil) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
-	}
+    if (!_specifiers) {
 
-	return _specifiers;
+        _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
+    }
+
+    return _specifiers;
 
 }
 
@@ -256,14 +257,12 @@ BOOL enabled = NO;
 
 @implementation EnabledToggleColorsRootListController
 
--(NSArray *)specifiers {
-
-	if (_specifiers == nil) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self] retain];
+- (NSArray *)specifiers {
+	if (!_specifiers) {
+		_specifiers = [self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self];
 	}
 
 	return _specifiers;
-
 }
 
 @end
@@ -271,14 +270,12 @@ BOOL enabled = NO;
 
 @implementation DisabledToggleColorsRootListController
 
--(NSArray *)specifiers {
-
-	if (_specifiers == nil) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self] retain];
+- (NSArray *)specifiers {
+	if (!_specifiers) {
+		_specifiers = [self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self];
 	}
 
 	return _specifiers;
-
 }
 
 @end

@@ -1,14 +1,12 @@
-ARCHS = arm64 arm64e
-TARGET = iphone:clang:latest:latest
-
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = AesteaRevived
 
-$(TWEAK_NAME)_FILES = Tweak.x
-$(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-logical-op-parentheses -Wno-c++11-extra-semi
-$(TWEAK_NAME)_FRAMEWORKS = UIKit
-$(TWEAK_NAME)_EXTRA_FRAMEWORKS += Cephei
-$(TWEAK_NAME)_LIBRARIES = sparkcolourpicker
+AesteaRevived_FILES = Tweak.x
+AesteaRevived_CFLAGS = -fobjc-arc -Wno-logical-op-parentheses -Wno-c++11-extra-semi
+AesteaRevived_FRAMEWORKS = UIKit
+AesteaRevived_EXTRA_FRAMEWORKS += Cephei
+
+export AesteaRevived_LIBRARIES = gcuniversal
 
 include $(THEOS_MAKE_PATH)/tweak.mk
