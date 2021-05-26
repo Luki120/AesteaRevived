@@ -174,8 +174,7 @@
 %ctor {
 
 	preferences = [[HBPreferences alloc] initWithIdentifier:@"love.litten.aesteapreferences"];
-
-    [preferences registerBool:&enabled default:YES forKey:@"Enabled"];
+	[preferences registerBool:&enabled default:YES forKey:@"Enabled"];
 	[preferences registerBool:&colorOnStateSwitch default:YES forKey:@"colorOnState"];
 	
 	[preferences registerBool:&colorAirplaneDisabledState default:NO forKey:@"colorAirplaneDisabledState"];
