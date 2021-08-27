@@ -11,14 +11,9 @@
 
 *  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see on the screenshot.
 
-##  Socials:
-
-* [Twitter](https://twitter.com/Lukii120)
-* [Support on Discord](https://discord.gg/2y5uWhhNJu)
-
 ## Special Thanks:
 
-* The original creator of this tweak is [litten'sGH](https://github.com/schneelittchen/). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
+* The original creator of this tweak is [schneelittchen](https://github.com/schneelittchen). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
 
 ## Contributing:
 
@@ -26,6 +21,11 @@
 * Push small commits (e.g if you changed 2 directories, commit one directory, then commit the other directory and only THEN push)
 * Keep commit titles short and then explain them in comments.
 * You **should NOT** push to main branch, preferably push to a new branch and *then* create the PR.
+
+##  Socials:
+
+* [Twitter](https://twitter.com/Lukii120)
+* [Support on Discord](https://discord.gg/2y5uWhhNJu)
 
 ## LICENSE:
 
