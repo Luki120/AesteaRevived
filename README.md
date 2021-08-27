@@ -1,12 +1,32 @@
+![download](https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg)
+
 # Aestea Revived
 
-## This tweak was compiled, reuploaded, and is currently maintained as a tribute, please read.
+## Features:
 
+* Color on enabled state.
+* Color on disabled state.
 
-* The original creator of this tweak is @schneelittchen. She handled it over to me for personal reasons, which I am grateful to her for it, since I started tweak development learning literally from this tweak, so please respect it.
+## DISCLAIMER:
 
-* If you use code from here, please link this repository or my [twitter](https://twitter.com/Lukii120)
+*  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see on the screenshot.
 
-* Refer to the LICENSE.
+##  Socials:
 
-![download](https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg)
+* [Twitter](https://twitter.com/Lukii120)
+* [Support on Discord](https://discord.gg/2y5uWhhNJu)
+
+## Special Thanks:
+
+* The original creator of this tweak is [litten'sGH](https://github.com/schneelittchen/). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
+
+## Contributing:
+
+* Contributions are more than welcomed, but should follow this etiquette:
+* Push small commits (e.g if you changed 2 directories, commit one directory, then commit the other directory and only THEN push)
+* Keep commit titles short and then explain them in comments.
+* You **should NOT** push to main branch, preferably push to a new branch and *then* create the PR.
+
+## LICENSE:
+
+[Apache-2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
