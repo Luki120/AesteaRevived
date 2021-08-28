@@ -21,8 +21,7 @@ static void postNSNotification() {
 
 	self = [super init];
 
-	if (self) {
-
+	if(self) {
 
 		self.navigationItem.titleView = [UIView new];
 		self.titleLabel = [UILabel new];
@@ -103,6 +102,32 @@ static void postNSNotification() {
 	self.headerImageView.clipsToBounds = YES;
 	self.headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.headerView addSubview:self.headerImageView];
+
+	UIButton *changelogButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+	changelogButton.alpha = 0.65;
+	changelogButton.frame = CGRectMake(0,0,30,30);
+	changelogButton.layer.cornerRadius = changelogButton.frame.size.height / 2;
+	changelogButton.layer.masksToBounds = YES;
+	[changelogButton setImage:[UIImage systemImageNamed:@"atom"] forState:UIControlStateNormal];
+	[changelogButton addTarget:self action:@selector(showWtfChangedInThisVersion:) forControlEvents:UIControlEventTouchUpInside];
+	changelogButton.tintColor = UIColor.whiteColor;
+
+
+	UIButton *respringButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+	respringButton.alpha = 0.65;
+	respringButton.frame = CGRectMake(0,0,30,30);
+	respringButton.layer.cornerRadius = respringButton.frame.size.height / 2;
+	respringButton.layer.masksToBounds = YES;
+	respringButton.tintColor = UIColor.whiteColor;
+	[respringButton setImage: [UIImage systemImageNamed:@"checkmark.circle"] forState:UIControlStateNormal];
+	[respringButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
+
+	respringButtonItem = [[UIBarButtonItem alloc] initWithCustomView:respringButton];
+	changelogButtonItem = [[UIBarButtonItem alloc] initWithCustomView:changelogButton];
+
+	NSArray *rightButtons;
+	rightButtons = @[respringButtonItem, changelogButtonItem];
+	self.navigationItem.rightBarButtonItems = rightButtons;
 	
 	[NSLayoutConstraint activateConstraints:@[
 
@@ -114,6 +139,165 @@ static void postNSNotification() {
 	]];
 
 	_table.tableHeaderView = self.headerView;
+
+}
+
+
+- (void)apply:(UIButton *)sender {
+
+
+	UIColor *firstColor = [UIColor colorWithRed: 0.74 green: 0.78 blue: 0.98 alpha: 1.00];
+	UIColor *secondColor = [UIColor colorWithRed: 0.77 green: 0.69 blue: 0.91 alpha: 1.00];
+
+	popController = [UIViewController new];
+	popController.preferredContentSize = CGSizeMake(125,96);
+	popController.modalPresentationStyle = UIModalPresentationPopover;
+
+	view = [[UIView alloc] initWithFrame:popController.view.frame];
+	gradient = [CAGradientLayer layer];
+	gradient.frame = view.frame;
+	gradient.startPoint = CGPointMake(1,1); // Lower right to upper left
+	gradient.endPoint = CGPointMake(0,0);
+	gradient.colors = [NSArray arrayWithObjects:(id)firstColor.CGColor, (id)secondColor.CGColor, nil];
+	[view.layer addSublayer:gradient];
+	[popController.view addSubview:view];
+
+	UILabel *respringLabel = [UILabel new];
+	respringLabel.text = @"Shall we respring?";
+	respringLabel.font = [UIFont boldSystemFontOfSize:15];
+	respringLabel.textColor = UIColor.labelColor;
+	respringLabel.numberOfLines = 2;
+	respringLabel.textAlignment = NSTextAlignmentCenter;
+	respringLabel.adjustsFontSizeToFitWidth = YES;
+	respringLabel.translatesAutoresizingMaskIntoConstraints = NO;
+
+	[popController.view addSubview:respringLabel];
+
+	[respringLabel.centerYAnchor constraintEqualToAnchor : popController.view.centerYAnchor].active = YES;
+	[respringLabel.centerXAnchor constraintEqualToAnchor : popController.view.centerXAnchor].active = YES;
+	[respringLabel.heightAnchor constraintEqualToConstant:50].active = YES;
+	[respringLabel.widthAnchor constraintEqualToConstant:110].active = YES;
+
+
+	UIButton *yesButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	[yesButton addTarget:self
+				action:@selector(yes:)
+				forControlEvents:UIControlEventTouchUpInside];
+	[yesButton setTitle:@"Yes" forState:UIControlStateNormal];
+	[yesButton setTitleColor:[UIColor labelColor] forState:UIControlStateNormal];
+	yesButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+	yesButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[popController.view addSubview:yesButton];
+
+	[yesButton.topAnchor constraintEqualToAnchor : respringLabel.bottomAnchor constant:-4].active = YES;
+	[yesButton.trailingAnchor constraintEqualToAnchor : popController.view.trailingAnchor constant:-20].active = YES;
+
+
+	UIButton *noButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	[noButton addTarget:self
+				action:@selector(no:)
+				forControlEvents:UIControlEventTouchUpInside];
+	[noButton setTitle:@"No" forState:UIControlStateNormal];
+	[noButton setTitleColor:[UIColor labelColor] forState:UIControlStateNormal];
+	noButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+	noButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[popController.view addSubview:noButton];
+
+	[noButton.topAnchor constraintEqualToAnchor : respringLabel.bottomAnchor constant:-4].active = YES;
+	[noButton.leadingAnchor constraintEqualToAnchor : popController.view.leadingAnchor constant:20].active = YES;
+
+
+	UIPopoverPresentationController *popover = popController.popoverPresentationController;
+	popover.delegate = self;
+	popover.barButtonItem = respringButtonItem;
+	popover.backgroundColor = UIColor.clearColor;
+	popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+
+	[self presentViewController:popController animated:YES completion:nil];
+
+	AudioServicesPlaySystemSound(1519);
+
+
+}
+
+
+- (void)yes:(UIButton *)sender {
+
+
+	AudioServicesPlaySystemSound(1521);
+
+	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
+
+	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings:settings];
+	backdropView.layer.masksToBounds = YES;
+	backdropView.clipsToBounds = YES;
+	backdropView.alpha = 0;
+	backdropView.frame = self.view.bounds;
+	[self.view addSubview:backdropView];
+
+	[UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+
+		backdropView.alpha = 1;
+
+	} completion:^(BOOL finished) {
+
+		pid_t pid;
+		const char* args[] = {"sbreload", NULL, NULL, NULL};
+		posix_spawn(&pid, "/usr/bin/sbreload", NULL, NULL, (char* const*)args, NULL);
+
+	}];
+
+
+}
+
+
+- (void)no:(UIButton *)sender {
+
+
+	AudioServicesPlaySystemSound(1521);
+
+	[popController dismissViewControllerAnimated:YES completion:nil];
+
+
+}
+
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+
+
+	return UIModalPresentationNone;
+
+
+}
+
+
+
+- (void)showWtfChangedInThisVersion:(id)sender {
+
+	AudioServicesPlaySystemSound(1521);
+
+	self.changelogController = [[OBWelcomeController alloc] initWithTitle:@"AesteaRevived" detailText:@"3.1" icon:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/AesteaIcon.png"]];
+
+	[self.changelogController addBulletedListItemWithTitle:@"General" description:@"Full refactor without Cephei, partially respringless. Colors apply on the fly, but the switches aren't reliable for now :c, my apologies. It may be looked into in the future." image:[UIImage systemImageNamed:@"checkmark.circle.fill"]];
+
+	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
+
+	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings:settings];	
+	backdropView.layer.masksToBounds = YES;
+	backdropView.clipsToBounds = YES;
+    [self.changelogController.viewIfLoaded insertSubview:backdropView atIndex:0];
+
+	backdropView.translatesAutoresizingMaskIntoConstraints = NO;
+	[backdropView.bottomAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.bottomAnchor constant:0].active = YES;
+	[backdropView.leftAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.leftAnchor constant:0].active = YES;
+	[backdropView.rightAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.rightAnchor constant:0].active = YES;
+	[backdropView.topAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.topAnchor constant:0].active = YES;
+
+    self.changelogController.viewIfLoaded.backgroundColor = UIColor.clearColor;
+    self.changelogController.view.tintColor = [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0];
+    self.changelogController.modalInPresentation = NO;
+    self.changelogController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:self.changelogController animated:YES completion:nil];
 
 }
 
