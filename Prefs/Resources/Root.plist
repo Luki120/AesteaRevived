@@ -27,8 +27,6 @@
 			<dict>
 				<key>cell</key>
 				<string>PSLinkCell</string>
-				<key>cellClass</key>
-				<string>HBTintedTableCell</string>
 				<key>detail</key>
 				<string>EnabledToggleColorsRootListController</string>
 				<key>isController</key>
@@ -39,8 +37,6 @@
 			<dict>
 				<key>cell</key>
 				<string>PSLinkCell</string>
-				<key>cellClass</key>
-				<string>HBTintedTableCell</string>
 				<key>detail</key>
 				<string>DisabledToggleColorsRootListController</string>
 				<key>isController</key>
@@ -51,28 +47,18 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>label</key>
-				<string>Other Options</string>
 			</dict>
 			<dict>
 				<key>cell</key>
-				<string>PSButtonCell</string>
+				<string>PSLinkCell</string>
 				<key>cellClass</key>
-				<string>HBTintedTableCell</string>
+				<string>AesteaTableCell</string>
+				<key>detail</key>
+				<string>ContributorsVC</string>
+				<key>isController</key>
+				<true/>
 				<key>label</key>
-				<string>Respring</string>
-				<key>action</key>
-				<string>respring</string>
-			</dict>
-			<dict>
-				<key>cell</key>
-				<string>PSButtonCell</string>
-				<key>cellClass</key>
-				<string>HBTintedTableCell</string>
-				<key>label</key>
-				<string>Reset Preferences</string>
-				<key>action</key>
-				<string>resetPrompt</string>
+				<string>Contributors</string>
 			</dict>
 			<dict>
 				<key>cell</key>
@@ -82,105 +68,37 @@
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>cellClass</key>
-				<string>HBTintedTableCell</string>
-				<key>label</key>
-				<string>Contributors</string>
+				<string>AesteaTableCell</string>
 				<key>detail</key>
-				<string>AESContributorsRootListController</string>
-				<key>AESContributors</key>
-				<string>Contributors</string>
+				<string>AesteaLinksVC</string>
+				<key>isController</key>
+				<true/>
+				<key>label</key>
+				<string>Take A Look</string>
 			</dict>
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>label</key>
-				<string>You Might Like:</string>
 			</dict>
 			<dict>
+				<key>action</key>
+				<string>shatterThePrefsToPieces</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
 				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>icon</key>
-				<string>IWantTranslucent.png</string>
+				<string>AesteaTableCell</string>
 				<key>label</key>
-				<string>IWantTranslucent</string>
-				<key>subtitle</key>
-				<string>Give your 3D touch menus a clean look</string>
-				<key>url</key>
-				<string>https://luki120.github.io/</string>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Lune</string>
-				<key>subtitle</key>
-				<string>Let A Moon Icon Appear While In DND</string>
-				<key>icon</key>
-				<string>Lune.png</string>
-				<key>url</key>
-				<string>https://repo.litten.love/depictions/lne/</string>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Rose</string>
-				<key>subtitle</key>
-				<string>System Wide Haptics, Great uh-huh</string>
-				<key>icon</key>
-				<string>Rose.png</string>
-				<key>url</key>
-				<string>https://repo.litten.love/depictions/rse/</string>
+				<string>Reset Preferences</string>
 			</dict>
 			<dict>
 				<key>cell</key>
-				<string>PSGroupCell</string>
+				<key>PSGroupCell</key>
 				<key>footerText</key>
-				<string>Aestea By Litten
-Artworks By taki
-Maintained By Luki</string>
+				<string>Aestea By Litten, Artworks By Taki, Maintained By Luki</string>
 				<key>isStaticText</key>
 				<true/>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Donate To Litten</string>
-				<key>subtitle</key>
-				<string>Appreciated &#x1f49d;</string>
-				<key>url</key>
-				<string>https://paypal.me/Litteeen</string>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Donate To Luki</string>
-				<key>subtitle</key>
-				<string>Appreciated ❣️</string>
-				<key>url</key>
-				<string>https://paypal.me/Luki120</string>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Source Code</string>
-				<key>subtitle</key>
-				<string>GitHub &#x1f30a;</string>
-				<key>url</key>
-				<string>https://github.com/Luki120/AesteaRevived</string>
-			</dict>
-			<dict>
-				<key>cellClass</key>
-				<string>HBLinkTableCell</string>
-				<key>label</key>
-				<string>Discord</string>
-				<key>subtitle</key>
-				<string>Chat with us &#x1f47e;</string>
-				<key>url</key>
-				<string>https://discord.gg/tUFuyJvAsg</string>
+				<key>footerAlignment</key>
+				<real>1</real>
 			</dict>
 			<dict>
 				<key>cell</key>

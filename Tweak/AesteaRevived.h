@@ -1,18 +1,10 @@
-#import <UIKit/UIKit.h>
-#import <Cephei/HBPreferences.h>
-
+@import UIKit;
 #import "GcColorPickerUtils.h"
-
-
-// Utils
-
-HBPreferences* preferences;
 
 
 // Prefs variables
 
-BOOL enabled;
-BOOL colorOnStateSwitch = YES;
+static BOOL colorOnState = YES;
 
 
 static BOOL colorAirplaneDisabledState;
@@ -27,57 +19,62 @@ static BOOL bluetoothEnabled;
 static BOOL reallyDisableTogglesOnTap;
 
 
-UIViewController* ancestor;
+UIViewController *ancestor;
 
 
-// Colors
-
-NSString* airplaneColor = @"ff9f0a";
-NSString* cellularColor = @"30d158";
-NSString* wifiColor = @"147efb";
-NSString* bluetoothColor = @"147efb";
-NSString* airdropColor = @"147efb";
-NSString* hotspotColor = @"30d158";
+static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
 
 
-NSString* offAirplaneColor = @"147efb";
-NSString* offCellularColor = @"147efb";
-NSString* offWiFiColor = @"147efb";
-NSString* offBluetoothColor = @"147efb";
-NSString* offAirdropColor = @"147efb";
-NSString* offHotspotColor = @"147efb";
+static void loadPrefs() {
+
+
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:prefsKeys];
+	NSMutableDictionary *prefs = dict ? [dict mutableCopy] : [NSMutableDictionary dictionary];
+	colorOnState = prefs[@"colorOnState"] ? [prefs[@"colorOnState"] boolValue] : YES;
+	colorAirplaneDisabledState = prefs[@"colorAirplaneDisabledState"] ? [prefs[@"colorAirplaneDisabledState"] boolValue] : NO;
+	colorCellularDisabledState = prefs[@"colorCellularDisabledState"] ? [prefs[@"colorCellularDisabledState"] boolValue] : NO;
+	colorWiFiDisabledState = prefs[@"colorWiFiDisabledState"] ? [prefs[@"colorWiFiDisabledState"] boolValue] : NO;
+	colorBluetoothDisabledState = prefs[@"colorBluetoothDisabledState"] ? [prefs[@"colorBluetoothDisabledState"] boolValue] : NO;
+	colorAirdropDisabledState = prefs[@"colorAirdropDisabledState"] ? [prefs[@"colorAirdropDisabledState"] boolValue] : NO;
+	colorHotspotDisabledState = prefs[@"colorHotspotDisabledState"] ? [prefs[@"colorHotspotDisabledState"] boolValue] : NO;
+
+
+}
 
 
 // Interfaces
 
-@interface CCUIRoundButton : UIControl
-@property (nonatomic, retain) UIView* normalStateBackgroundView; 
-@property (nonatomic, retain) UIView* selectedStateBackgroundView;
+
+@interface CCUIRoundButton : UIView
+@property (nonatomic, strong) UIView *normalStateBackgroundView; 
+@property (nonatomic, strong) UIView *selectedStateBackgroundView;
+- (void)setToggleColors;
 - (id)_viewControllerForAncestor;
 @end
 
 
-@interface SBIconController : UIViewController
-- (void)viewDidAppear:(BOOL)animated;
-@end
-
-
 @interface CCUILabeledRoundButton
-@property(nonatomic, copy, readwrite) NSString *title;
+@property (nonatomic, copy, readwrite) NSString *title;
 @end
 
 
 @interface SBWiFiManager
 - (id)sharedInstance;
-- (void)setWiFiEnabled: (BOOL)enabled;
+- (void)setWiFiEnabled:(BOOL)enabled;
 - (bool)wiFiEnabled;
 @end
 
 
 @interface BluetoothManager
 - (id)sharedInstance;
-- (void)setEnabled: (BOOL)enabled;
+- (void)setEnabled:(BOOL)enabled;
 - (bool)enabled;
-- (void)setPowered: (BOOL)powered;
+- (void)setPowered:(BOOL)powered;
 - (bool)powered;
+@end
+
+
+@interface NSDistributedNotificationCenter : NSNotificationCenter
++ (instancetype)defaultCenter;
+- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo;
 @end

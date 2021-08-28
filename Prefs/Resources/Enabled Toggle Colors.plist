@@ -11,13 +11,11 @@
 			<key>default</key>
 			<true/>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
 			<key>key</key>
 			<string>colorOnState</string>
 			<key>label</key>
 			<string>Enable On State Coloring</string>
-			<key>PostNotification</key>
-			<string>love.litten.aesteapreferences/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -31,7 +29,9 @@
 			<key>label</key>
 			<string>Airplane</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>airplaneColor</string>
 			<key>supportsAlpha</key>
@@ -47,7 +47,9 @@
 			<key>label</key>
 			<string>Cellular</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>cellularColor</string>
 			<key>supportsAlpha</key>
@@ -63,7 +65,9 @@
 			<key>label</key>
 			<string>WiFi</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>wifiColor</string>
 			<key>supportsAlpha</key>
@@ -79,7 +83,9 @@
 			<key>label</key>
 			<string>Bluetooth</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>bluetoothColor</string>
 			<key>supportsAlpha</key>
@@ -95,7 +101,9 @@
 			<key>label</key>
 			<string>AirDrop</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>airdropColor</string>
 			<key>supportsAlpha</key>
@@ -111,7 +119,9 @@
 			<key>label</key>
 			<string>Hotspot</string>
 			<key>defaults</key>
-			<string>love.litten.aesteapreferences</string>
+			<string>me.luki.aestearevivedprefs</string>
+			<key>PostNotification</key>
+			<string>me.luki.aestearevivedprefs/colorsApplied</string>
 			<key>key</key>
 			<string>hotspotColor</string>
 			<key>supportsAlpha</key>

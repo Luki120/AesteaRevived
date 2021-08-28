@@ -1,281 +1,481 @@
 #include "AESRootListController.h"
-#import "../Tweak/AesteaRevived.h"
 
-UIBlurEffect* blur;
-UIVisualEffectView* blurView;
 
-BOOL enabled = NO;
+static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
+
+#define tint [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0]
+
+static void postNSNotification() {
+
+
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"toggleColorsApplied" object:nil];
+
+
+}
+
 
 @implementation AESRootListController
 
+
 - (instancetype)init {
 
-    self = [super init];
+	self = [super init];
 
-    if (self) {
-        AESAppearanceSettings *appearanceSettings = [[AESAppearanceSettings alloc] init];
-        self.hb_appearanceSettings = appearanceSettings;
-        self.enableSwitch = [[UISwitch alloc] init];
-        self.enableSwitch.onTintColor = [UIColor colorWithRed:1.00 green:0.96 blue:0.64 alpha:1.0];
-        [self.enableSwitch addTarget:self action:@selector(toggleState) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem* switchy = [[UIBarButtonItem alloc] initWithCustomView: self.enableSwitch];
-        self.navigationItem.rightBarButtonItem = switchy;
+	if (self) {
 
-        self.navigationItem.titleView = [UIView new];
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,10,10)];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"3.0";
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.navigationItem.titleView addSubview:self.titleLabel];
 
-        self.iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,10,10)];
-        self.iconView.contentMode = UIViewContentModeScaleAspectFit;
-        self.iconView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/icon@2x.png"];
-        self.iconView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.iconView.alpha = 0.0;
-        [self.navigationItem.titleView addSubview:self.iconView];
-        
-        [NSLayoutConstraint activateConstraints:@[
-            [self.titleLabel.topAnchor constraintEqualToAnchor:self.navigationItem.titleView.topAnchor],
-            [self.titleLabel.leadingAnchor constraintEqualToAnchor:self.navigationItem.titleView.leadingAnchor],
-            [self.titleLabel.trailingAnchor constraintEqualToAnchor:self.navigationItem.titleView.trailingAnchor],
-            [self.titleLabel.bottomAnchor constraintEqualToAnchor:self.navigationItem.titleView.bottomAnchor],
-            [self.iconView.topAnchor constraintEqualToAnchor:self.navigationItem.titleView.topAnchor],
-            [self.iconView.leadingAnchor constraintEqualToAnchor:self.navigationItem.titleView.leadingAnchor],
-            [self.iconView.trailingAnchor constraintEqualToAnchor:self.navigationItem.titleView.trailingAnchor],
-            [self.iconView.bottomAnchor constraintEqualToAnchor:self.navigationItem.titleView.bottomAnchor],
-        ]];
-    }
-    return self;
+		self.navigationItem.titleView = [UIView new];
+		self.titleLabel = [UILabel new];
+		self.titleLabel.text = @"3.1";
+		self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+		self.titleLabel.textColor = UIColor.whiteColor;
+		self.titleLabel.textAlignment = NSTextAlignmentCenter;
+		self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+		[self.navigationItem.titleView addSubview:self.titleLabel];
+
+		self.iconView = [UIImageView new];
+		self.iconView.alpha = 0;
+		self.iconView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/icon@2x.png"];
+		self.iconView.contentMode = UIViewContentModeScaleAspectFit;
+		self.iconView.translatesAutoresizingMaskIntoConstraints = NO;
+		[self.navigationItem.titleView addSubview:self.iconView];
+		
+		[NSLayoutConstraint activateConstraints:@[
+
+			[self.titleLabel.topAnchor constraintEqualToAnchor:self.navigationItem.titleView.topAnchor],
+			[self.titleLabel.leadingAnchor constraintEqualToAnchor:self.navigationItem.titleView.leadingAnchor],
+			[self.titleLabel.trailingAnchor constraintEqualToAnchor:self.navigationItem.titleView.trailingAnchor],
+			[self.titleLabel.bottomAnchor constraintEqualToAnchor:self.navigationItem.titleView.bottomAnchor],
+			[self.iconView.topAnchor constraintEqualToAnchor:self.navigationItem.titleView.topAnchor],
+			[self.iconView.leadingAnchor constraintEqualToAnchor:self.navigationItem.titleView.leadingAnchor],
+			[self.iconView.trailingAnchor constraintEqualToAnchor:self.navigationItem.titleView.trailingAnchor],
+			[self.iconView.bottomAnchor constraintEqualToAnchor:self.navigationItem.titleView.bottomAnchor],
+
+		]];
+
+	}
+
+	return self;
+
 }
 
 -(NSArray *)specifiers {
 
-    if (!_specifiers) {
+	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 
-        _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
-    }
-
-    return _specifiers;
+	return _specifiers;
 
 }
+
+
+- (id)readPreferenceValue:(PSSpecifier*)specifier {
+
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
+	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+
+}
+
+
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
+	[settings setObject:value forKey:specifier.properties[@"key"]];
+	[settings writeToFile:prefsKeys atomically:YES];
+
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"toggleColorsApplied" object:nil];
+
+}
+
 
 - (void)viewDidLoad {
 
-    [super viewDidLoad];
+	[super viewDidLoad];
 
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,200,200)];
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,200,200)];
-    self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.headerImageView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Banner.png"];
-    self.headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.headerImageView.clipsToBounds = YES;
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/colorsApplied"), NULL, 0);
 
-    [self.headerView addSubview:self.headerImageView];
-    [NSLayoutConstraint activateConstraints:@[
-        [self.headerImageView.topAnchor constraintEqualToAnchor:self.headerView.topAnchor],
-        [self.headerImageView.leadingAnchor constraintEqualToAnchor:self.headerView.leadingAnchor],
-        [self.headerImageView.trailingAnchor constraintEqualToAnchor:self.headerView.trailingAnchor],
-        [self.headerImageView.bottomAnchor constraintEqualToAnchor:self.headerView.bottomAnchor],
-    ]];
+	self.headerView = [UIView new];
+	self.headerView.frame = CGRectMake(0,0,200,200);
+	self.headerImageView = [UIImageView new];
+	self.headerImageView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Banner.png"];
+	self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+	self.headerImageView.clipsToBounds = YES;
+	self.headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.headerView addSubview:self.headerImageView];
+	
+	[NSLayoutConstraint activateConstraints:@[
 
-    _table.tableHeaderView = self.headerView;
+		[self.headerImageView.topAnchor constraintEqualToAnchor:self.headerView.topAnchor],
+		[self.headerImageView.leadingAnchor constraintEqualToAnchor:self.headerView.leadingAnchor],
+		[self.headerImageView.trailingAnchor constraintEqualToAnchor:self.headerView.trailingAnchor],
+		[self.headerImageView.bottomAnchor constraintEqualToAnchor:self.headerView.bottomAnchor],
+	
+	]];
+
+	_table.tableHeaderView = self.headerView;
 
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    tableView.tableHeaderView = self.headerView;
-    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+	tableView.tableHeaderView = self.headerView;
+	return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
 
-    CGRect frame = self.table.bounds;
-    frame.origin.y = -frame.size.height;
+	CGRect frame = self.table.bounds;
+	frame.origin.y = -frame.size.height;
 
-    self.navigationController.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0];
-    [self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
-    self.navigationController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationController.navigationBar.translucent = YES;
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-
-    [super viewDidAppear:animated];
-
-    [self.navigationController.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-
-    [self setEnableSwitchState];
+	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
 
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
 
-    [super viewWillDisappear:animated];
+	[super viewWillDisappear:animated];
 
-    [self.navigationController.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
 
 }
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-    CGFloat offsetY = scrollView.contentOffset.y;
+	CGFloat offsetY = scrollView.contentOffset.y;
 
-    if (offsetY > 200) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.iconView.alpha = 1.0;
-            self.titleLabel.alpha = 0.0;
-        }];
-    } else {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.iconView.alpha = 0.0;
-            self.titleLabel.alpha = 1.0;
-        }];
-    }
-    
-    if (offsetY > 0) offsetY = 0;
-    self.headerImageView.frame = CGRectMake(0, offsetY, self.headerView.frame.size.width, 200 - offsetY);
+	if (offsetY > 200) {
 
-}
-
-- (void)toggleState {
-
-    [[self enableSwitch] setEnabled:NO];
-
-    NSString* path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/love.litten.aesteapreferences.plist"];
-    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSSet* allKeys = [NSSet setWithArray:[dictionary allKeys]];
-    HBPreferences *preferences = [[HBPreferences alloc] initWithIdentifier: @"love.litten.aesteapreferences"];
-    
-    if (!([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/Preferences/love.litten.aesteapreferences.plist"])) {
-        enabled = YES;
-        [preferences setBool:enabled forKey:@"Enabled"];
-        [self respring];
-    } else if (!([allKeys containsObject:@"Enabled"])) {
-        enabled = YES;
-        [preferences setBool:enabled forKey:@"Enabled"];
-        [self respring];
-    } else if ([[preferences objectForKey:@"Enabled"] isEqual:@(NO)]) {
-        enabled = YES;
-        [preferences setBool:enabled forKey:@"Enabled"];
-        [self respring];
-    } else if ([[preferences objectForKey:@"Enabled"] isEqual:@(YES)]) {
-        enabled = NO;
-        [preferences setBool:enabled forKey:@"Enabled"];
-        [self respring];
-    }
-
-}
-
-- (void)setEnableSwitchState {
-
-    NSString* path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/love.litten.aesteapreferences.plist"];
-    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSSet* allKeys = [NSSet setWithArray:[dictionary allKeys]];
-    HBPreferences* preferences = [[HBPreferences alloc] initWithIdentifier: @"love.litten.aesteapreferences"];
-    
-    if (!([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/Preferences/love.litten.aesteapreferences.plist"]))
-        [[self enableSwitch] setOn:NO animated:YES];
-    else if (!([allKeys containsObject:@"Enabled"]))
-        [[self enableSwitch] setOn:NO animated:YES];
-    else if ([[preferences objectForKey:@"Enabled"] isEqual:@(YES)])
-        [[self enableSwitch] setOn:YES animated:YES];
-    else if ([[preferences objectForKey:@"Enabled"] isEqual:@(NO)])
-        [[self enableSwitch] setOn:NO animated:YES];
-
-}
-
-- (void)resetPrompt {
-
-    UIAlertController *resetAlert = [UIAlertController alertControllerWithTitle:@"Aestea Revived"
-	message:@"Do You Really Want To Reset Your Preferences?"
-	preferredStyle:UIAlertControllerStyleActionSheet];
+		[UIView animateWithDuration:0.2 animations:^{
+			self.iconView.alpha = 1.0;
+			self.titleLabel.alpha = 0.0;
+		}];
 	
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Yep" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-			
-        [self resetPreferences];
+	} else {
+		
+		[UIView animateWithDuration:0.2 animations:^{
+			self.iconView.alpha = 0.0;
+			self.titleLabel.alpha = 1.0;
+		}];
+	
+	}
+	
+	if (offsetY > 0) offsetY = 0;
+	self.headerImageView.frame = CGRectMake(0, offsetY, self.headerView.frame.size.width, 200 - offsetY);
+
+}
+
+
+- (void)shatterThePrefsToPieces {
+
+
+	AudioServicesPlaySystemSound(1521);
+
+	UIAlertController *resetAlert = [UIAlertController alertControllerWithTitle:@"AesteaRevived"
+	message:@"Do you want to destroy this preferences and rebuild them fresh upon a respring?"
+	preferredStyle:UIAlertControllerStyleAlert];
+
+	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Shoot" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+
+		BOOL success = [fileManager removeItemAtPath:@"var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist" error:nil];
+
+		if(success) [self blurEffect];
 
 	}];
 
-	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Nope" style:UIAlertActionStyleCancel handler:nil];
+	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Meh" style:UIAlertActionStyleCancel handler:nil];
 
 	[resetAlert addAction:confirmAction];
 	[resetAlert addAction:cancelAction];
 
 	[self presentViewController:resetAlert animated:YES completion:nil];
 
-}
-
-- (void)resetPreferences {
-
-    HBPreferences* pfs = [[HBPreferences alloc] initWithIdentifier: @"love.litten.aesteapreferences"];
-    for (NSString* key in [pfs dictionaryRepresentation]) {
-        [pfs removeObjectForKey:key];
-    }
-    
-    [[self enableSwitch] setOn:NO animated: YES];
-    [self respring];
 
 }
 
-- (void)respring {
 
-    blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-    blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
-    [blurView setFrame:self.view.bounds];
-    [blurView setAlpha:0.0];
-    [[self view] addSubview:blurView];
+- (void)blurEffect {
 
-    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [blurView setAlpha:1.0];
-    } completion:^(BOOL finished) {
-        [self respringUtil];
-    }];
+	
+	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
+
+	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings:settings];
+	backdropView.layer.masksToBounds = YES;
+	backdropView.clipsToBounds = YES;
+	backdropView.alpha = 0;
+	backdropView.frame = self.view.bounds;
+	[self.view addSubview:backdropView];
+
+	[UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+
+		backdropView.alpha = 1;
+
+	} completion:^(BOOL finished) {
+
+		[self resetPrefs];
+
+	}];
+
+}
+
+
+- (void)resetPrefs {
+
+
+	pid_t pid;
+	const char* args[] = {"sbreload", NULL, NULL, NULL};
+	posix_spawn(&pid, "/usr/bin/sbreload", NULL, NULL, (char* const*)args, NULL);
+
 
 }
 
-- (void)respringUtil {
-
-    pid_t pid;
-    const char* args[] = {"killall", "backboardd", NULL};
-
-    [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Aestea"]];
-
-    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char *const *)args, NULL);
-
-}
 
 @end
 
 
 @implementation EnabledToggleColorsRootListController
 
+
 - (NSArray *)specifiers {
-	if (!_specifiers) {
-		_specifiers = [self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self];
-	}
+
+	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self];
 
 	return _specifiers;
+
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+	[super viewWillDisappear:animated];
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
+
+}
+
 
 @end
 
 
 @implementation DisabledToggleColorsRootListController
 
+
 - (NSArray *)specifiers {
-	if (!_specifiers) {
-		_specifiers = [self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self];
-	}
+	
+	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self];
 
 	return _specifiers;
+
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+	[super viewWillDisappear:animated];
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
+
+}
+
+@end
+
+
+@implementation ContributorsVC
+
+
+- (NSArray *)specifiers {
+	
+	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"AesteaContributors" target:self];
+
+	return _specifiers;
+
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+	[super viewWillDisappear:animated];
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
+
+}
+
+
+@end
+
+
+@implementation AesteaLinksVC
+
+
+- (NSArray *)specifiers {
+	
+	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"AesteaLinks" target:self];
+
+	return _specifiers;
+
+}
+
+
+- (void)discord {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://discord.gg/jbE3avwSHs"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)paypal {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Luki120"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)paypalLitten {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Litteeen"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)github {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/Luki120/AesteaRevived"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)iWantTranslucent {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://luki120.github.io/"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)lune {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Lune/"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)rose {
+
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Rose/"] options:@{} completionHandler:nil];
+
+
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+	[super viewWillDisappear:animated];
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
+
+}
+
+
+@end
+
+
+
+@implementation AesteaTableCell
+
+
+- (void)tintColorDidChange {
+
+	[super tintColorDidChange];
+
+	self.textLabel.textColor = tint;
+	self.textLabel.highlightedTextColor = tint;
+
+}
+
+
+- (void)refreshCellContentsWithSpecifier:(PSSpecifier *)specifier {
+
+	[super refreshCellContentsWithSpecifier:specifier];
+
+	if([self respondsToSelector:@selector(tintColor)]) {
+
+		self.textLabel.textColor = tint;
+		self.textLabel.highlightedTextColor = tint;
+
+	}
+
+}
+
 
 @end

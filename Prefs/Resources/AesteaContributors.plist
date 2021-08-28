@@ -11,13 +11,15 @@
 				<string>Lead Developer</string>
 			</dict>
 			<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
 				<key>cellClass</key>
-				<string>HBTwitterCell</string>
-				<key>label</key>
+				<string>GcTwitterCell</string>
+				<key>accountLabel</key>
 				<string>Luki120</string>
-				<key>user</key>
+				<key>account</key>
 				<string>Lukii120</string>
-				<key>iconURL</key>
+				<key>URL</key>
 				<string>https://avatars.githubusercontent.com/u/74214115?v=4</string>
 			</dict>
 			<dict>
@@ -27,13 +29,15 @@
 				<string>Original Creator</string>
 			</dict>
 			<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
 				<key>cellClass</key>
-				<string>HBTwitterCell</string>
-				<key>label</key>
+				<string>GcTwitterCell</string>
+				<key>accountLabel</key>
 				<string>Litten</string>
-				<key>user</key>
+				<key>account</key>
 				<string>schneelittchen</string>
-				<key>iconURL</key>
+				<key>URL</key>
 				<string>https://avatars.githubusercontent.com/u/83172201?v=4</string>
 			</dict>
 			<dict>
@@ -43,14 +47,16 @@
 				<string>Pretty Twitter Cells</string>
 			</dict>
 			<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
 				<key>cellClass</key>
-				<string>HBTwitterCell</string>
-				<key>label</key>
-				<string>MrGCGamer</string>
-				<key>user</key>
+				<string>GcTwitterCell</string>
+				<key>accountLabel</key>
 				<string>MrGcGamer</string>
-				<key>iconURL</key>
-				<string>https://pbs.twimg.com/profile_images/1099662093270294529/QmNCdMs0_400x400.png</string>
+				<key>account</key>
+				<string>MrGcGamer</string>
+				<key>URL</key>
+				<string>https://avatars.githubusercontent.com/u/32813275?v=4</string>
 			</dict>
 		</array>
 		<key>title</key>

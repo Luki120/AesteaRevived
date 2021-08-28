@@ -1,7 +1,7 @@
-Package: com.luki.aestearevived
+Package: me.luki.aestearevived
 Name: Aestea Revived 🌊
-Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13), com.mrgcgamer.libgcuniversal (>=1.2.4)
-Version: 3.0
+Depends: mobilesubstrate, preferenceloader, firmware (>= 13), com.mrgcgamer.libgcuniversal
+Version: 3.1
 Architecture: iphoneos-arm
 Description: An aesthetic look to your loved connectivity toggles
 Maintainer: Luki

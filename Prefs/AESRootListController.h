@@ -1,29 +1,23 @@
 #import <Preferences/PSListController.h>
 #import <Preferences/PSSpecifier.h>
-#import <CepheiPrefs/HBRootListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
-#import <Cephei/HBPreferences.h>
-#import <Cephei/HBRespringController.h>
+#import <Preferences/PSTableCell.h>
+#import <AudioToolbox/AudioServices.h>
 #import <spawn.h>
 
 
-@interface AESAppearanceSettings : HBAppearanceSettings
+
+
+@interface _UIBackdropViewSettings : NSObject
++ (id)settingsForStyle:(long long)arg1;
 @end
 
-@interface AESRootListController : HBRootListController {
-    UITableView * _table;
-}
-@property (nonatomic, retain) UISwitch* enableSwitch;
-@property (nonatomic, retain) UIView *headerView;
-@property (nonatomic, retain) UIImageView *headerImageView;
-@property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UIImageView *iconView;
-- (void)toggleState;
-- (void)setEnableSwitchState;
-- (void)resetPrompt;
-- (void)resetPreferences;
-- (void)respring;
-- (void)respringUtil;
+
+@interface _UIBackdropView : UIView
+- (id)initWithFrame:(CGRect)arg1 autosizesToFitSuperview:(BOOL)arg2 settings:(id)arg3;
+- (id)initWithSettings:(id)arg1;
+@property (assign, nonatomic) BOOL blurRadiusSetOnce;
+@property (assign, nonatomic) double _blurRadius;
+@property (nonatomic, copy) NSString * _blurQuality;
 @end
 
 
@@ -32,4 +26,37 @@
 
 
 @interface DisabledToggleColorsRootListController : PSListController
+@end
+
+
+@interface AESRootListController : PSListController {
+    
+    UITableView * _table;
+
+}
+@property (nonatomic, strong) UIImageView *iconView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIImageView *headerImageView;
+- (void)shatterThePrefsToPieces;
+- (void)blurEffect;
+- (void)resetPrefs;
+@end
+
+
+@interface AesteaTableCell : PSTableCell
+@end
+
+
+@interface AesteaLinksVC : PSListController
+@end
+
+
+@interface ContributorsVC : PSListController
+@end
+
+
+@interface NSDistributedNotificationCenter : NSNotificationCenter
++ (instancetype)defaultCenter;
+- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo;
 @end
