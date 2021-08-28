@@ -85,6 +85,8 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>Colors apply on the fly, but the switches aren't reliable for now :c, my apologies. It may be looked into in the future.</string>
 			</dict>
 			<dict>
 				<key>cell</key>
