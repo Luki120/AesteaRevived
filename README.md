@@ -2,18 +2,19 @@
 
 # Aestea Revived
 
+## Credits
+
+* The original creator of this tweak is [schneelittchen](https://github.com/schneelittchen). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
+
 ## Features
 
 * Color on enabled state.
 * Color on disabled state.
+* Really disable WiFi and bluetooth toggles on tap.
 
 ## Disclaimer
 
 *  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see in the screenshot.
-
-## Credits
-
-* The original creator of this tweak is [schneelittchen](https://github.com/schneelittchen). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
 
 ## Contributing
 
