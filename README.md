@@ -2,31 +2,31 @@
 
 # Aestea Revived
 
-## Features:
+## Features
 
 * Color on enabled state.
 * Color on disabled state.
 
-## DISCLAIMER:
+## Disclaimer
 
-*  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see on the screenshot.
+*  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see in the screenshot.
 
-## Special Thanks:
+## Credits
 
 * The original creator of this tweak is [schneelittchen](https://github.com/schneelittchen). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
 
-## Contributing:
+## Contributing
 
 * Contributions are more than welcomed, but should follow this etiquette:
 * Push small commits (e.g if you changed 2 directories, commit one directory, then commit the other directory and only THEN push)
 * Keep commit titles short and then explain them in comments.
 * You **should NOT** push to main branch, preferably push to a new branch and *then* create the PR.
 
-##  Socials:
+##  Socials
 
 * [Twitter](https://twitter.com/Lukii120)
 * [Support on Discord](https://discord.gg/2y5uWhhNJu)
 
-## LICENSE:
+## LICENSE
 
 [Apache-2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
