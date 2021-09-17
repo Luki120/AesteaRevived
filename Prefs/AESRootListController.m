@@ -285,7 +285,7 @@ static void postNSNotification() {
 	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings:settings];	
 	backdropView.layer.masksToBounds = YES;
 	backdropView.clipsToBounds = YES;
-    [self.changelogController.viewIfLoaded insertSubview:backdropView atIndex:0];
+	[self.changelogController.viewIfLoaded insertSubview:backdropView atIndex:0];
 
 	backdropView.translatesAutoresizingMaskIntoConstraints = NO;
 	[backdropView.bottomAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.bottomAnchor constant:0].active = YES;
@@ -293,11 +293,11 @@ static void postNSNotification() {
 	[backdropView.rightAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.rightAnchor constant:0].active = YES;
 	[backdropView.topAnchor constraintEqualToAnchor:self.changelogController.viewIfLoaded.topAnchor constant:0].active = YES;
 
-    self.changelogController.viewIfLoaded.backgroundColor = UIColor.clearColor;
-    self.changelogController.view.tintColor = [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0];
-    self.changelogController.modalInPresentation = NO;
-    self.changelogController.modalPresentationStyle = UIModalPresentationPageSheet;
-    [self presentViewController:self.changelogController animated:YES completion:nil];
+	self.changelogController.viewIfLoaded.backgroundColor = UIColor.clearColor;
+	self.changelogController.view.tintColor = [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0];
+	self.changelogController.modalInPresentation = NO;
+	self.changelogController.modalPresentationStyle = UIModalPresentationPageSheet;
+	[self presentViewController:self.changelogController animated:YES completion:nil];
 
 }
 
@@ -550,7 +550,7 @@ static void postNSNotification() {
 - (void)discord {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://discord.gg/jbE3avwSHs"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://discord.gg/jbE3avwSHs"] options:@{} completionHandler:nil];
 
 
 }
@@ -559,7 +559,7 @@ static void postNSNotification() {
 - (void)paypal {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Luki120"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Luki120"] options:@{} completionHandler:nil];
 
 
 }
@@ -568,7 +568,7 @@ static void postNSNotification() {
 - (void)paypalLitten {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Litteeen"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Litteeen"] options:@{} completionHandler:nil];
 
 
 }
@@ -577,7 +577,7 @@ static void postNSNotification() {
 - (void)github {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/Luki120/AesteaRevived"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/Luki120/AesteaRevived"] options:@{} completionHandler:nil];
 
 
 }
@@ -586,7 +586,7 @@ static void postNSNotification() {
 - (void)iWantTranslucent {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://luki120.github.io/"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://luki120.github.io/"] options:@{} completionHandler:nil];
 
 
 }
@@ -595,7 +595,7 @@ static void postNSNotification() {
 - (void)lune {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Lune/"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Lune/"] options:@{} completionHandler:nil];
 
 
 }
@@ -604,7 +604,7 @@ static void postNSNotification() {
 - (void)rose {
 
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Rose/"] options:@{} completionHandler:nil];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Rose/"] options:@{} completionHandler:nil];
 
 
 }
