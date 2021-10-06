@@ -86,7 +86,7 @@
 			<key>label</key>
 			<string>Lune</string>
 			<key>icon</key>
-			<string>Lune@2x.png</string>
+			<string>Assets/Lune@2x.png</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -102,7 +102,7 @@
 			<key>label</key>
 			<string>Rose</string>
 			<key>icon</key>
-			<string>Rose@2x.png</string>
+			<string>Assets/Rose@2x.png</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -118,7 +118,7 @@
 			<key>label</key>
 			<string>IWantTranslucent</string>
 			<key>icon</key>
-			<string>IWantTranslucent@2x.png</string>
+			<string>Assets/IWantTranslucent@2x.png</string>
 		</dict>
 	</array>
 	<key>title</key>

@@ -11,7 +11,7 @@
 		<key>detail</key>
 		<string>AESRootListController</string>
 		<key>icon</key>
-		<string>icon.png</string>
+		<string>Assets/icon.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>

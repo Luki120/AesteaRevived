@@ -17,7 +17,7 @@ static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearev
 
 		self.navigationItem.titleView = [UIView new];
 		self.iconView = [UIImageView new];
-		self.iconView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/icon@2x.png"];
+		self.iconView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/icon@2x.png"];
 		self.iconView.contentMode = UIViewContentModeScaleAspectFit;
 		self.iconView.translatesAutoresizingMaskIntoConstraints = NO;
 		[self.navigationItem.titleView addSubview:self.iconView];
@@ -84,7 +84,7 @@ static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearev
 	self.headerView = [UIView new];
 	self.headerView.frame = CGRectMake(0,0,200,200);
 	self.headerImageView = [UIImageView new];
-	self.headerImageView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Banner.png"];
+	self.headerImageView.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/Banner.png"];
 	self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
 	self.headerImageView.clipsToBounds = YES;
 	self.headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -120,7 +120,7 @@ static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearev
 
 	AudioServicesPlaySystemSound(1521);
 
-	self.changelogController = [[OBWelcomeController alloc] initWithTitle:@"AesteaRevived" detailText:@"3.2" icon:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/AesteaIcon.png"]];
+	self.changelogController = [[OBWelcomeController alloc] initWithTitle:@"AesteaRevived" detailText:@"3.2" icon:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/AesteaIcon.png"]];
 
 	[self.changelogController addBulletedListItemWithTitle:@"Code" description:@"Aestea is fully respringless now. All changes apply on the fly." image:[UIImage systemImageNamed:@"checkmark.circle.fill"]];
 
