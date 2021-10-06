@@ -19,6 +19,9 @@ static BOOL akColorOnState = YES;
 static BOOL akColorAirplaneDisabledState;
 static BOOL akColorWiFiDisabledState;
 static BOOL akColorBluetoothDisabledState;
+static BOOL akColorCellularDisabledState;
+static BOOL akColorHotspotDisabledState;
+static BOOL akColorAirDropDisabledState;
 
 
 // Aestea BSC
@@ -60,7 +63,9 @@ static void loadPrefs() {
 	akColorAirplaneDisabledState = prefs[@"akColorAirplaneDisabledState"] ? [prefs[@"akColorAirplaneDisabledState"] boolValue] : NO;
 	akColorWiFiDisabledState = prefs[@"akColorWiFiDisabledState"] ? [prefs[@"akColorWiFiDisabledState"] boolValue] : NO;
 	akColorBluetoothDisabledState = prefs[@"akColorBluetoothDisabledState"] ? [prefs[@"akColorBluetoothDisabledState"] boolValue] : NO;
-
+	akColorCellularDisabledState = prefs[@"akColorCellularDisabledState"] ? [prefs[@"akColorCellularDisabledState"] boolValue] : NO;
+	akColorHotspotDisabledState = prefs[@"akColorHotspotDisabledState"] ? [prefs[@"akColorHotspotDisabledState"] boolValue] : NO;
+	akColorAirDropDisabledState = prefs[@"akColorAirDropDisabledState"] ? [prefs[@"akColorAirDropDisabledState"] boolValue] : NO;
 
 	// Aestea BSC
 

@@ -55,6 +55,57 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 
 	}
 
+
+	else if([self.buttonName isEqualToString:@"Cellular"]) {
+
+		if(akColorCellularDisabledState)
+
+			self.ccRoundButton.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akOffCellularColor" fallback:@"147efb"];
+
+		else self.ccRoundButton.normalStateBackgroundView.backgroundColor = nil;
+
+		if(akColorOnState)
+
+			self.ccRoundButton.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akCellularColor" fallback:@"30d158"];
+
+		else self.ccRoundButton.selectedStateBackgroundView.backgroundColor = UIColor.systemGreenColor;
+
+	}
+
+
+	else if([self.buttonName isEqualToString:@"Hotspot"]) {
+
+		if(akColorHotspotDisabledState)
+
+			self.ccRoundButton.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akOffHotspotColor" fallback:@"147efb"];
+
+		else self.ccRoundButton.normalStateBackgroundView.backgroundColor = nil;
+
+		if(akColorOnState)
+
+			self.ccRoundButton.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akHotspotColor" fallback:@"147efb"];
+
+		else self.ccRoundButton.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
+	}
+
+
+	else if([self.buttonName isEqualToString:@"AirDrop"]) {
+
+		if(akColorAirDropDisabledState)
+
+			self.ccRoundButton.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akOffAirDropColor" fallback:@"147efb"];
+
+		else self.ccRoundButton.normalStateBackgroundView.backgroundColor = nil;
+
+		if(akColorOnState)
+
+			self.ccRoundButton.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"akAirDropColor" fallback:@"147efb"];
+
+		else self.ccRoundButton.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
+	}
+
 }
 
 

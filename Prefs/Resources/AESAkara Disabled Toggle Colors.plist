@@ -48,6 +48,42 @@
 			</dict>
 			<dict>
 				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>akColorCellularDisabledState</string>
+				<key>label</key>
+				<string>Color Cellular</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>akColorHotspotDisabledState</string>
+				<key>label</key>
+				<string>Color Hotspot</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>akColorAirDropDisabledState</string>
+				<key>label</key>
+				<string>Color AirDrop</string>
+			</dict>
+			<dict>
+				<key>cell</key>
 				<string>PSGroupCell</string>
 			</dict>
 			<dict>
@@ -99,6 +135,60 @@
 				<string>me.luki.aestearevivedprefs/akaraColorsApplied</string>
 				<key>key</key>
 				<string>akOffBluetoothColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Cellular</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/akaraColorsApplied</string>
+				<key>key</key>
+				<string>akOffCellularColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Hotspot</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/akaraColorsApplied</string>
+				<key>key</key>
+				<string>akOffHotspotColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>AirDrop</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/akaraColorsApplied</string>
+				<key>key</key>
+				<string>akOffAirDropColor</string>
 				<key>supportsAlpha</key>
 				<true />
 				<key>fallback</key>
