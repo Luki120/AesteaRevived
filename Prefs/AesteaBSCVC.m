@@ -16,41 +16,11 @@ static void postNSNotification() {
 @implementation AesteaBSCVC
 
 
--(NSArray *)specifiers {
+- (NSArray *)specifiers {
 
 	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"AesteaBSC" target:self];
 
 	return _specifiers;
-
-}
-
-
-- (id)readPreferenceValue:(PSSpecifier*)specifier {
-
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
-	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
-
-}
-
-
-- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
-
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
-	[settings setObject:value forKey:specifier.properties[@"key"]];
-	[settings writeToFile:prefsKeys atomically:YES];
-
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"bscToggleColorsApplied" object:nil];
-
-}
-
-
-- (void)viewDidLoad {
-
-	[super viewDidLoad];
-
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/bscColorsApplied"), NULL, 0);
 
 }
 
