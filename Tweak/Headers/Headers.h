@@ -1,6 +1,14 @@
 @import UIKit;
+#import <dlfcn.h>
 #import <substrate.h>
 #import "GcUniversal/GcColorPickerUtils.h"
+
+
+// Global
+
+
+#define isAkaraInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
+#define isBSCInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
 
 
 // Aestea Akara
@@ -25,6 +33,7 @@ static BOOL bscColorBluetoothDisabledState;
 
 // Aestea Stock
 
+
 static BOOL colorOnState = YES;
 
 static BOOL colorAirplaneDisabledState;
@@ -35,9 +44,6 @@ static BOOL colorAirdropDisabledState;
 static BOOL colorHotspotDisabledState;
 
 static BOOL bluetoothEnabled;
-
-UIViewController *ancestor;
-
 
 static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
 

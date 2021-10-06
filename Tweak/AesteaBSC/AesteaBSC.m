@@ -46,15 +46,13 @@ void new_setAESBSCToggleColors(SCGroupedControlsModuleViewController *self, SEL 
 }
 
 
-void(*origVDL)(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated);
+void(*origVWA)(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated);
 
-void overrideVDL(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated) {
+void overrideVWA(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated) {
 
-	origVDL(self, _cmd, animated);
+	origVWA(self, _cmd, animated);
 
 	new_setAESBSCToggleColors(self, _cmd);
-
-	NSLog(@"AESLoaded");
 
 	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
 	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(updateStates) name:@"bscToggleColorsApplied" object:nil];
@@ -69,7 +67,7 @@ void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 	origADFL(self, _cmd, app);
 
-	MSHookMessageEx(NSClassFromString(@"SCGroupedControlsModuleViewController"), @selector(viewWillAppear:), (IMP) &overrideVDL, (IMP *) &origVDL);
+	MSHookMessageEx(NSClassFromString(@"SCGroupedControlsModuleViewController"), @selector(viewWillAppear:), (IMP) &overrideVWA, (IMP *) &origVWA);
 
 	class_addMethod (
 		
@@ -83,6 +81,8 @@ void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 }
 
 __attribute__((constructor)) static void init() {
+
+	if(isAkaraInstalled) return;
 
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
