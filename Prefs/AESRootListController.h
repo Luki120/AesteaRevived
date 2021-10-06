@@ -52,14 +52,6 @@ UIView *view;
 @end
 
 
-@interface EnabledToggleColorsRootListController : PSListController
-@end
-
-
-@interface DisabledToggleColorsRootListController : PSListController
-@end
-
-
 @interface AESRootListController : PSListController<UIPopoverPresentationControllerDelegate> {
     
     UITableView * _table;
@@ -80,15 +72,15 @@ UIView *view;
 @end
 
 
-@interface AesteaTableCell : PSTableCell
-@end
-
-
 @interface AesteaLinksVC : PSListController
 @end
 
 
 @interface ContributorsVC : PSListController
+@end
+
+
+@interface AesteaTableCell : PSTableCell
 @end
 
 

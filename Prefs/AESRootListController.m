@@ -5,14 +5,6 @@ static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearev
 
 #define tint [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0]
 
-static void postNSNotification() {
-
-
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"toggleColorsApplied" object:nil];
-
-
-}
-
 
 @implementation AESRootListController
 
@@ -91,8 +83,6 @@ static void postNSNotification() {
 - (void)viewDidLoad {
 
 	[super viewDidLoad];
-
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/colorsApplied"), NULL, 0);
 
 	self.headerView = [UIView new];
 	self.headerView.frame = CGRectMake(0,0,200,200);
@@ -317,10 +307,9 @@ static void postNSNotification() {
 	CGRect frame = self.table.bounds;
 	frame.origin.y = -frame.size.height;
 
-	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 
 }
 
@@ -429,76 +418,6 @@ static void postNSNotification() {
 @end
 
 
-@implementation EnabledToggleColorsRootListController
-
-
-- (NSArray *)specifiers {
-
-	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Enabled Toggle Colors" target:self];
-
-	return _specifiers;
-
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-
-	[super viewWillAppear:animated];
-
-	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
-	self.navigationController.navigationController.navigationBar.translucent = YES;
-
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-
-	[super viewWillDisappear:animated];
-
-	self.navigationController.navigationController.navigationBar.barTintColor = nil;
-
-}
-
-
-@end
-
-
-@implementation DisabledToggleColorsRootListController
-
-
-- (NSArray *)specifiers {
-	
-	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Disabled Toggle Colors" target:self];
-
-	return _specifiers;
-
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
-	[super viewWillAppear:animated];
-
-	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
-	self.navigationController.navigationController.navigationBar.translucent = YES;
-
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-
-	[super viewWillDisappear:animated];
-
-	self.navigationController.navigationController.navigationBar.barTintColor = nil;
-
-}
-
-@end
-
-
 @implementation ContributorsVC
 
 
@@ -515,10 +434,9 @@ static void postNSNotification() {
 
 	[super viewWillAppear:animated];
 
-	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 
 }
 
@@ -614,10 +532,9 @@ static void postNSNotification() {
 
 	[super viewWillAppear:animated];
 
-	self.navigationController.navigationController.navigationBar.tintColor = UIColor.whiteColor;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-	[self.navigationController.navigationController.navigationBar setShadowImage: [UIImage new]];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 
 }
 

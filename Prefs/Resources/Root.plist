@@ -28,21 +28,31 @@
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>detail</key>
-				<string>EnabledToggleColorsRootListController</string>
+				<string>AesteaAkaraVC</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>
-				<string>Enabled Toggle Colors</string>
+				<string>Akara</string>
 			</dict>
 			<dict>
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>detail</key>
-				<string>DisabledToggleColorsRootListController</string>
+				<string>AesteaBSCVC</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>
-				<string>Disabled Toggle Colors</string>
+				<string>Big Sur Center</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>detail</key>
+				<string>AesteaStockVC</string>
+				<key>isController</key>
+				<true/>
+				<key>label</key>
+				<string>Stock CC</string>
 			</dict>
 			<dict>
 				<key>cell</key>

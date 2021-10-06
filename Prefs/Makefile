@@ -1,12 +1,11 @@
-include $(THEOS)/makefiles/common.mk
-
 BUNDLE_NAME = AesteaPrefs
 
-AesteaPrefs_FILES = AESRootListController.m
+AesteaPrefs_FILES = AesteaAkaraVC.m AesteaBSCVC.m AESRootListController.m AesteaStockVC.m
 AesteaPrefs_CFLAGS = -fobjc-arc
-AesteaPrefs_FRAMEWORKS = UIKit
 AesteaPrefs_LIBRARIES = gcuniversal
+AesteaPrefs_FRAMEWORKS = UIKit
 AesteaPrefs_PRIVATE_FRAMEWORKS = Preferences OnBoardingKit
 AesteaPrefs_INSTALL_PATH = /Library/PreferenceBundles
 
+include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/bundle.mk
