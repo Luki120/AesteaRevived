@@ -124,7 +124,7 @@ static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearev
 
 	[self.changelogController addBulletedListItemWithTitle:@"Code" description:@"Aestea is fully respringless now. All changes apply on the fly." image:[UIImage systemImageNamed:@"checkmark.circle.fill"]];
 
-	[self.changelogController addBulletedListItemWithTitle:@"General" description:@"Added full seamless Akara & Big Sur Center support." image:[UIImage systemImageNamed:@"checkmark.circle.fill"]];
+	[self.changelogController addBulletedListItemWithTitle:@"General" description:@"Added full seamless Akara, Big Sur Center & Prysm support." image:[UIImage systemImageNamed:@"checkmark.circle.fill"]];
 
 	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
 
