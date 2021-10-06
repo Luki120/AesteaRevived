@@ -22,6 +22,7 @@
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemOrangeColor;
 
+
 		if(colorAirplaneDisabledState)
 
 			self.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"offAirplaneColor" fallback:@"147efb"];	
@@ -37,9 +38,15 @@
 
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"cellularColor" fallback:@"30d158"];
 
+		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemGreenColor;
+
+
 		if(colorCellularDisabledState)
 
 			self.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"offCellularColor" fallback:@"147efb"];
+
+		else self.normalStateBackgroundView.backgroundColor = nil;
+
 
 	}
 
@@ -51,6 +58,7 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"wifiColor" fallback:@"147efb"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
 
 		if(colorWiFiDisabledState)
 
@@ -67,9 +75,14 @@
 
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"bluetoothColor" fallback:@"147efb"];
 
+		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
+
 		if(colorBluetoothDisabledState)
 
 			self.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"offBluetoothColor" fallback:@"147efb"];
+
+		else self.normalStateBackgroundView.backgroundColor = nil;
 
 	}
 
@@ -80,9 +93,14 @@
 
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"airdropColor" fallback:@"147efb"];
 
+		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
+
 		if(colorAirdropDisabledState)
 
 			self.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"offAirdropColor" fallback:@"147efb"];
+
+		else self.normalStateBackgroundView.backgroundColor = nil;
 
 	}
 
@@ -93,9 +111,14 @@
 
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"hotspotColor" fallback:@"147efb"];
 
+		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
+
+
 		if(colorHotspotDisabledState)
 
 			self.normalStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"offHotspotColor" fallback:@"147efb"];
+
+		else self.normalStateBackgroundView.backgroundColor = nil;
 
 	}
 
@@ -197,8 +220,6 @@
 
 %ctor {
 
-
 	loadPrefs();
-
 
 }
