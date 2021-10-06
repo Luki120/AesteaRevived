@@ -164,7 +164,7 @@ void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 __attribute__((constructor)) static void init() {
 
-	if(isBSCInstalled) return;
+	if(isBSCInstalled || isPrysmInstalled) return;
 
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
