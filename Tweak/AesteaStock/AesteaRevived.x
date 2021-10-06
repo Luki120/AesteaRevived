@@ -12,7 +12,7 @@
 
 	loadPrefs();
 
-	ancestor = [self _viewControllerForAncestor];
+	UIViewController *ancestor = [self _viewControllerForAncestor];
 
 	if([ancestor isKindOfClass: %c(CCUIConnectivityAirplaneViewController)]) {
 
