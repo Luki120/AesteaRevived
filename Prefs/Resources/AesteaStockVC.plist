@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Aestea Stock</string>
+			</dict>
+            <dict>
+                <key>cell</key>
+                <string>PSLinkCell</string>
+                <key>detail</key>
+                <string>AESStockEnabledToggleColorsVC</string>
+                <key>isController</key>
+                <true/>
+                <key>label</key>
+                <string>Enabled Toggle Colors</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSLinkCell</string>
+                <key>detail</key>
+                <string>AESStockDisabledToggleColorsVC</string>
+                <key>isController</key>
+                <true/>
+                <key>label</key>
+                <string>Disabled Toggle Colors</string>
+            </dict>
+		</array>
+		<key>title</key>
+		<string>Aestea Revived</string>
+	</dict>
+</plist>
