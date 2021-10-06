@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Disabled Toggle Colors</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>pryColorAirplaneDisabledState</string>
+				<key>label</key>
+				<string>Color Airplane</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>pryColorWiFiDisabledState</string>
+				<key>label</key>
+				<string>Color WiFi</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>pryColorBluetoothDisabledState</string>
+				<key>label</key>
+				<string>Color Bluetooth</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>pryColorCellularDisabledState</string>
+				<key>label</key>
+				<string>Color Cellular</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<false />
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>key</key>
+				<string>pryColorAirDropDisabledState</string>
+				<key>label</key>
+				<string>Color Airdrop &amp; Hotspot</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Airplane</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/prysmColorsApplied</string>
+				<key>key</key>
+				<string>pryOffAirplaneColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>WiFi</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/prysmColorsApplied</string>
+				<key>key</key>
+				<string>pryOffWiFiColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Bluetooth</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/prysmColorsApplied</string>
+				<key>key</key>
+				<string>pryOffBluetoothColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Cellular</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/prysmColorsApplied</string>
+				<key>key</key>
+				<string>pryOffCellularColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>GcColorPickerCell</string>
+				<key>label</key>
+				<string>Airdrop &amp; Hotspot</string>
+				<key>defaults</key>
+				<string>me.luki.aestearevivedprefs</string>
+				<key>PostNotification</key>
+				<string>me.luki.aestearevivedprefs/prysmColorsApplied</string>
+				<key>key</key>
+				<string>pryOffAirDropColor</string>
+				<key>supportsAlpha</key>
+				<true />
+				<key>fallback</key>
+				<string>147efb</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>Aestea Revived</string>
+	</dict>
+</plist>

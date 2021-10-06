@@ -9,6 +9,7 @@
 
 #define isAkaraInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
 #define isBSCInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
+#define isPrysmInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib", RTLD_NOW)
 
 
 // Aestea Akara
@@ -33,6 +34,17 @@ static BOOL bscColorAirplaneOrCellularDisabledState;
 static BOOL bscColorWiFiDisabledState;
 static BOOL bscColorBluetoothDisabledState;
 
+
+// Aestea Prysm
+
+
+static BOOL pryColorOnState = YES;
+
+static BOOL pryColorAirplaneDisabledState;
+static BOOL pryColorWiFiDisabledState;
+static BOOL pryColorBluetoothDisabledState;
+static BOOL pryColorCellularDisabledState;
+static BOOL pryColorAirDropDisabledState;
 
 // Aestea Stock
 
@@ -74,6 +86,14 @@ static void loadPrefs() {
 	bscColorWiFiDisabledState = prefs[@"bscColorWiFiDisabledState"] ? [prefs[@"bscColorWiFiDisabledState"] boolValue] : NO;
 	bscColorBluetoothDisabledState = prefs[@"bscColorBluetoothDisabledState"] ? [prefs[@"bscColorBluetoothDisabledState"] boolValue] : NO;
 
+	// Aestea Prysm
+
+	pryColorOnState = prefs[@"pryColorOnState"] ? [prefs[@"pryColorOnState"] boolValue] : YES;
+	pryColorAirplaneDisabledState = prefs[@"pryColorAirplaneDisabledState"] ? [prefs[@"pryColorAirplaneDisabledState"] boolValue] : NO;
+	pryColorCellularDisabledState = prefs[@"pryColorCellularDisabledState"] ? [prefs[@"pryColorCellularDisabledState"] boolValue] : NO;
+	pryColorWiFiDisabledState = prefs[@"pryColorWiFiDisabledState"] ? [prefs[@"pryColorWiFiDisabledState"] boolValue] : NO;
+	pryColorBluetoothDisabledState = prefs[@"pryColorBluetoothDisabledState"] ? [prefs[@"pryColorBluetoothDisabledState"] boolValue] : NO;
+	pryColorAirDropDisabledState = prefs[@"pryColorAirDropDisabledState"] ? [prefs[@"pryColorAirDropDisabledState"] boolValue] : NO;
 
 	// Aestea Stock
 
@@ -135,6 +155,23 @@ static void loadPrefs() {
 @property (nonatomic, strong, readwrite) SCGroupedControlView *bluetoothControlView;
 @property (nonatomic, strong, readwrite) SCGroupedControlView *cellularControlView;
 - (void)updateStates;
+@end
+
+
+// Aestea Prysm
+
+
+@interface PrysmButtonView : UIView
+@property (nonatomic, strong, readwrite) UIColor *altStateColor;
+@end
+
+
+@interface PrysmConnectivityModuleViewController : UIViewController
+@property (nonatomic, strong, readwrite) PrysmButtonView *airplaneButton;
+@property (nonatomic, strong, readwrite) PrysmButtonView *wifiButton;
+@property (nonatomic, strong, readwrite) PrysmButtonView *bluetoothButton;
+@property (nonatomic, strong, readwrite) PrysmButtonView *cellularButton;
+@property (nonatomic, strong, readwrite) PrysmButtonView *airdropButton;
 @end
 
 

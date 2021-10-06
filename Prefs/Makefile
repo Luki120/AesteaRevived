@@ -1,6 +1,6 @@
 BUNDLE_NAME = AesteaPrefs
 
-AesteaPrefs_FILES = AesteaAkaraVC.m AesteaBSCVC.m AESRootListController.m AesteaStockVC.m
+AesteaPrefs_FILES = AesteaAkaraVC.m AesteaBSCVC.m AESRootListController.m AesteaPrysmVC.m AesteaStockVC.m
 AesteaPrefs_CFLAGS = -fobjc-arc
 AesteaPrefs_LIBRARIES = gcuniversal
 AesteaPrefs_FRAMEWORKS = UIKit
