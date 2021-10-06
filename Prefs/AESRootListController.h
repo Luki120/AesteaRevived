@@ -8,29 +8,22 @@
 // Global
 
 
-UIViewController *popController;
-UIBarButtonItem *respringButtonItem;
-UIBarButtonItem *changelogButtonItem;
-CAGradientLayer *gradient;
-UIView *view;
-
-
 @interface OBButtonTray : UIView
-@property (nonatomic,retain) UIVisualEffectView * effectView;
+@property (nonatomic, strong) UIVisualEffectView *effectView;
 - (void)addButton:(id)arg1;
-- (void)addCaptionText:(id)arg1;;
+- (void)addCaptionText:(id)arg1;
 @end
 
 
 @interface OBBoldTrayButton : UIButton
-- (void)setTitle:(id)arg1 forState:(unsigned long long)arg2;
 + (id)buttonWithType:(long long)arg1;
+- (void)setTitle:(id)arg1 forState:(unsigned long long)arg2;
 @end
 
 
 @interface OBWelcomeController : UIViewController
-@property (nonatomic, retain) UIView * viewIfLoaded;
-@property (nonatomic, strong) UIColor * backgroundColor;
+@property (nonatomic, strong) UIView *viewIfLoaded;
+@property (nonatomic, strong) UIColor *backgroundColor;
 @property (assign, nonatomic) BOOL _shouldInlineButtontray;
 - (OBButtonTray *)buttonTray;
 - (id)initWithTitle:(id)arg1 detailText:(id)arg2 icon:(id)arg3;
@@ -48,11 +41,11 @@ UIView *view;
 - (id)initWithSettings:(id)arg1;
 @property (assign, nonatomic) BOOL blurRadiusSetOnce;
 @property (assign, nonatomic) double _blurRadius;
-@property (nonatomic, copy) NSString * _blurQuality;
+@property (copy, nonatomic) NSString *_blurQuality;
 @end
 
 
-@interface AESRootListController : PSListController<UIPopoverPresentationControllerDelegate> {
+@interface AESRootListController : PSListController {
     
     UITableView * _table;
 
@@ -63,8 +56,6 @@ UIView *view;
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UIBarButtonItem *respringButton;
 @property (nonatomic, strong) OBWelcomeController *changelogController;
-- (void)yes:(UIButton *)sender;
-- (void)no:(UIButton *)sender;
 - (void)showWtfChangedInThisVersion:(UIButton *)sender;
 - (void)shatterThePrefsToPieces;
 - (void)blurEffect;
