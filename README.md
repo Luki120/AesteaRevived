@@ -10,7 +10,7 @@
 
 * Color on enabled state.
 * Color on disabled state.
-* Akara & Big Sur Center support.
+* Akara, Big Sur Center & Prysm support.
 * Really disable WiFi and bluetooth toggles on tap.
 
 ## Disclaimer
