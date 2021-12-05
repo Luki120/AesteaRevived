@@ -15,12 +15,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>github</string>
+			<string>launchGitHub</string>
 			<key>label</key>
 			<string>Source Code 🔥</string>
 		</dict>
@@ -29,12 +25,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>paypal</string>
+			<string>launchPayPal</string>
 			<key>label</key>
 			<string>Donate To Luki 🥰</string>
 		</dict>
@@ -43,12 +35,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>paypalLitten</string>
+			<string>launchPayPalLitten</string>
 			<key>label</key>
 			<string>Donate To Litten &#x1f49d;</string>
 		</dict>
@@ -57,12 +45,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>discord</string>
+			<string>launchDiscord</string>
 			<key>label</key>
 			<string>Chat With Us On Discord</string>
 		</dict>
@@ -77,12 +61,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>lune</string>
+			<string>launchLune</string>
 			<key>label</key>
 			<string>Lune</string>
 			<key>icon</key>
@@ -93,12 +73,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>rose</string>
+			<string>launchRose</string>
 			<key>label</key>
 			<string>Rose</string>
 			<key>icon</key>
@@ -109,12 +85,8 @@
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>me.luki.aestearevivedprefs</string>
 			<key>action</key>
-			<string>iWantTranslucent</string>
+			<string>launchIWantTranslucent</string>
 			<key>label</key>
 			<string>IWantTranslucent</string>
 			<key>icon</key>

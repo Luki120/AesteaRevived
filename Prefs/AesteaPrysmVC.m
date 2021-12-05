@@ -1,9 +1,4 @@
-#include "AesteaPrysmVC.h"
-
-
-static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
-
-#define tint [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0]
+#import "AesteaPrysmVC.h"
 
 
 static void postNSNotification() {
@@ -15,11 +10,41 @@ static void postNSNotification() {
 
 @implementation AesteaPrysmVC
 
+
 - (NSArray *)specifiers {
 
 	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"AesteaPrysm" target:self];
 
 	return _specifiers;
+
+}
+
+
+- (void)viewDidLoad {
+
+	[super viewDidLoad];
+
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/prysmColorsApplied"), NULL, 0);
+
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+	[super viewWillDisappear:animated];
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
 
 }
 
@@ -45,35 +70,6 @@ static void postNSNotification() {
 }
 
 
-- (void)viewDidLoad {
-
-	[super viewDidLoad];
-
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/prysmColorsApplied"), NULL, 0);
-
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-
-	[super viewWillAppear:animated];
-
-	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
-	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
-
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-
-	[super viewWillDisappear:animated];
-
-	self.navigationController.navigationController.navigationBar.barTintColor = nil;
-
-}
-
-
 @end
 
 
@@ -95,7 +91,7 @@ static void postNSNotification() {
 
 	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
 
 }
 
@@ -151,7 +147,7 @@ static void postNSNotification() {
 
 	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
 
 }
 

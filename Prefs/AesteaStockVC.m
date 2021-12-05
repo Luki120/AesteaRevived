@@ -1,9 +1,5 @@
-#include "AesteaStockVC.h"
+#import "AesteaStockVC.h"
 
-
-static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
-
-#define tint [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0]
 
 static void postNSNotification() {
 
@@ -30,7 +26,7 @@ static void postNSNotification() {
 
 	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
 
 }
 
@@ -74,7 +70,7 @@ static void postNSNotification() {
 
 	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
 
 }
 
@@ -88,7 +84,7 @@ static void postNSNotification() {
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier*)specifier {
+- (id)readPreferenceValue:(PSSpecifier *)specifier {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
@@ -97,7 +93,7 @@ static void postNSNotification() {
 }
 
 
-- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
@@ -139,7 +135,7 @@ static void postNSNotification() {
 
 	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationController.navigationBar.barTintColor = tint;
+	self.navigationController.navigationController.navigationBar.barTintColor = AESTintColor;
 
 }
 
@@ -153,7 +149,7 @@ static void postNSNotification() {
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier*)specifier {
+- (id)readPreferenceValue:(PSSpecifier *)specifier {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
@@ -162,7 +158,7 @@ static void postNSNotification() {
 }
 
 
-- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:prefsKeys]];
