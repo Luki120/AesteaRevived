@@ -74,7 +74,7 @@
 				<key>cellClass</key>
 				<string>AesteaTableCell</string>
 				<key>detail</key>
-				<string>ContributorsVC</string>
+				<string>AesteaContributorsVC</string>
 				<key>isController</key>
 				<true/>
 				<key>label</key>
