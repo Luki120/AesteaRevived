@@ -9,9 +9,9 @@
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>AESRootListController</string>
+		<string>AesteaVC</string>
 		<key>icon</key>
-		<string>Assets/icon.png</string>
+		<string>Assets/Aestea.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>
