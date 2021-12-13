@@ -3,7 +3,7 @@
 
 @implementation AesteaVC {
 
-	UITableView * _table;
+	UITableView *_table;
 	UIImageView *iconView;
 	UILabel *versionLabel;
 	UIStackView *navBarStackView;
@@ -172,7 +172,7 @@
 
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 
-		BOOL success = [fileManager removeItemAtPath:@"var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist" error:nil];
+		BOOL success = [fileManager removeItemAtPath:@"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist" error:nil];
 
 		if(success) [self crossDissolveBlur];
 
