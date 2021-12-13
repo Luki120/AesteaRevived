@@ -16,19 +16,9 @@
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
 			<key>action</key>
-			<string>launchGitHub</string>
+			<string>launchDiscord</string>
 			<key>label</key>
-			<string>Source Code 🔥</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>cellClass</key>
-			<string>AesteaTableCell</string>
-			<key>action</key>
-			<string>launchPayPal</string>
-			<key>label</key>
-			<string>Donate To Luki 🥰</string>
+			<string>Chat With Us On Discord</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -46,15 +36,37 @@
 			<key>cellClass</key>
 			<string>AesteaTableCell</string>
 			<key>action</key>
-			<string>launchDiscord</string>
+			<string>launchPayPal</string>
 			<key>label</key>
-			<string>Chat With Us On Discord</string>
+			<string>Donate To Luki 🥰</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>AesteaTableCell</string>
+			<key>action</key>
+			<string>launchGitHub</string>
+			<key>label</key>
+			<string>Source Code 🔥</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>You Might Like</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>AesteaTableCell</string>
+			<key>action</key>
+			<string>launchIWantTranslucent</string>
+			<key>label</key>
+			<string>IWantTranslucent</string>
+			<key>icon</key>
+			<string>Assets/IWantTranslucent@2x.png</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -79,18 +91,6 @@
 			<string>Rose</string>
 			<key>icon</key>
 			<string>Assets/Rose@2x.png</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>cellClass</key>
-			<string>AesteaTableCell</string>
-			<key>action</key>
-			<string>launchIWantTranslucent</string>
-			<key>label</key>
-			<string>IWantTranslucent</string>
-			<key>icon</key>
-			<string>Assets/IWantTranslucent@2x.png</string>
 		</dict>
 	</array>
 	<key>title</key>
