@@ -1,11 +1,11 @@
 @import UIKit;
 #import <dlfcn.h>
 #import <substrate.h>
-#import "GcUniversal/GcColorPickerUtils.h"
+#import <GcUniversal/GcColorPickerUtils.h>
+#import "Common.h"
 
 
 // Global
-
 
 #define isAkaraInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
 #define isBSCInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
@@ -13,7 +13,6 @@
 
 
 // Aestea Akara
-
 
 static BOOL akColorOnState = YES;
 
@@ -27,7 +26,6 @@ static BOOL akColorAirDropDisabledState;
 
 // Aestea BSC
 
-
 static BOOL bscColorOnState = YES;
 
 static BOOL bscColorAirplaneOrCellularDisabledState;
@@ -36,7 +34,6 @@ static BOOL bscColorBluetoothDisabledState;
 
 
 // Aestea Prysm
-
 
 static BOOL pryColorOnState = YES;
 
@@ -47,7 +44,6 @@ static BOOL pryColorCellularDisabledState;
 static BOOL pryColorAirDropDisabledState;
 
 // Aestea Stock
-
 
 static BOOL colorOnState = YES;
 
@@ -60,13 +56,9 @@ static BOOL colorHotspotDisabledState;
 
 static BOOL bluetoothEnabled;
 
-static NSString *prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
-
-
 static void loadPrefs() {
 
-
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:prefsKeys];
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: kPath];
 	NSMutableDictionary *prefs = dict ? [dict mutableCopy] : [NSMutableDictionary dictionary];
 
 	// Aestea Akara
@@ -105,15 +97,13 @@ static void loadPrefs() {
 	colorAirdropDisabledState = prefs[@"colorAirdropDisabledState"] ? [prefs[@"colorAirdropDisabledState"] boolValue] : NO;
 	colorHotspotDisabledState = prefs[@"colorHotspotDisabledState"] ? [prefs[@"colorHotspotDisabledState"] boolValue] : NO;
 
-
 }
 
 
 // Aestea Akara
 
-
 @interface MTMaterialView : UIView
-@property (nonatomic, assign, readwrite) CGFloat weighting;
+@property (nonatomic, assign) CGFloat weighting;
 @end
 
 
@@ -121,13 +111,13 @@ static void loadPrefs() {
 @property (nonatomic, strong) UIView *normalStateBackgroundView; 
 @property (nonatomic, strong) UIView *selectedStateBackgroundView;
 - (void)setToggleColors;
-- (id)_viewControllerForAncestor;
+- (UIViewController *)_viewControllerForAncestor;
 @end
 
 
 @interface AkaraConnectivityRoundButtonViewController : UIViewController
-@property (nonatomic, strong, readwrite) NSString *buttonName;
-@property (nonatomic, strong, readwrite) CCUIRoundButton *ccRoundButton;
+@property (nonatomic, strong) NSString *buttonName;
+@property (nonatomic, strong) CCUIRoundButton *ccRoundButton;
 @end
 
 
@@ -137,69 +127,60 @@ static void loadPrefs() {
 
 // Aestea BSC
 
-
 @interface SCButtonView : UIView
-@property (nonatomic, strong, readwrite) UIColor *defaultColor;
-@property (nonatomic, strong, readwrite) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *defaultColor;
+@property (nonatomic, strong) UIColor *selectedColor;
 @end
 
 
 @interface SCGroupedControlView : UIView
-@property (nonatomic, assign, readwrite) NSInteger style;
-@property (nonatomic, strong, readwrite) SCButtonView *buttonView;
+@property (nonatomic, assign) NSInteger style;
+@property (nonatomic, strong) SCButtonView *buttonView;
 @end
 
 
 @interface SCGroupedControlsModuleViewController : UIViewController
-@property (nonatomic, strong, readwrite) SCGroupedControlView *wifiControlView;
-@property (nonatomic, strong, readwrite) SCGroupedControlView *bluetoothControlView;
-@property (nonatomic, strong, readwrite) SCGroupedControlView *cellularControlView;
+@property (nonatomic, strong) SCGroupedControlView *wifiControlView;
+@property (nonatomic, strong) SCGroupedControlView *bluetoothControlView;
+@property (nonatomic, strong) SCGroupedControlView *cellularControlView;
 - (void)updateStates;
 @end
 
 
 // Aestea Prysm
 
-
 @interface PrysmButtonView : UIView
-@property (nonatomic, strong, readwrite) UIColor *altStateColor;
+@property (nonatomic, strong) UIColor *altStateColor;
 @end
 
 
 @interface PrysmConnectivityModuleViewController : UIViewController
-@property (nonatomic, strong, readwrite) PrysmButtonView *airplaneButton;
-@property (nonatomic, strong, readwrite) PrysmButtonView *wifiButton;
-@property (nonatomic, strong, readwrite) PrysmButtonView *bluetoothButton;
-@property (nonatomic, strong, readwrite) PrysmButtonView *cellularButton;
-@property (nonatomic, strong, readwrite) PrysmButtonView *airdropButton;
+@property (nonatomic, strong) PrysmButtonView *airplaneButton;
+@property (nonatomic, strong) PrysmButtonView *wifiButton;
+@property (nonatomic, strong) PrysmButtonView *bluetoothButton;
+@property (nonatomic, strong) PrysmButtonView *cellularButton;
+@property (nonatomic, strong) PrysmButtonView *airdropButton;
 @end
 
 
 // Aestea Stock
 
-
 @interface CCUILabeledRoundButton
-@property (copy, nonatomic, readwrite) NSString *title;
+@property (copy, nonatomic) NSString *title;
 @end
 
 
 @interface SBWiFiManager
 - (id)sharedInstance;
 - (void)setWiFiEnabled:(BOOL)enabled;
-- (bool)wiFiEnabled;
+- (BOOL)wiFiEnabled;
 @end
 
 
 @interface BluetoothManager
 - (id)sharedInstance;
+- (BOOL)enabled;
+- (BOOL)powered;
 - (void)setEnabled:(BOOL)enabled;
-- (bool)enabled;
 - (void)setPowered:(BOOL)powered;
-- (bool)powered;
-@end
-
-
-@interface NSDistributedNotificationCenter : NSNotificationCenter
-+ (instancetype)defaultCenter;
-- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo;
 @end
