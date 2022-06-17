@@ -1,10 +1,10 @@
-![download](https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg)
-
 # Aestea Revived
+
+![AesteaRevived](https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg)
 
 ## Credits
 
-* The original creator of this tweak is [schneelittchen](https://github.com/schneelittchen). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
+* The original creator of this tweak is [Traurige](https://github.com/Traurige). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
 
 ## Features
 
@@ -20,19 +20,19 @@
 ## Contributing
 
 * Contributions are more than welcomed, but should follow this etiquette:
-* Push small commits (e.g if you changed 2 directories, commit one directory, then commit the other directory and only THEN push)
-* Keep commit titles short and then explain them in comments.
-* If you're a contributor with write access to this repository, you **should NOT** push to main branch, preferably push to a new branch and *then* create the PR.
 
-##  Socials
+	* If you're a contributor with write access to this repository, you **should NOT** push to main branch, preferably push to a new one and *then* create the PR.
+	* Keep commit titles short and then explain them in comments or preferably in the commit's description.
+	* Push small commits (e.g if you changed 2 directories, commit one directory, then commit the other one and only THEN push)
+
+## Socials
 
 * [Twitter](https://twitter.com/Lukii120)
-* [Support on Discord](https://discord.gg/2y5uWhhNJu)
 
 ## LICENSE
 
-[Apache-2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
+* [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
 
 ## Assets LICENSE
 
-* Under no means shall the visual assets of this repository – i.e., all photo-, picto-, icono-, and videographic material – (if any) be altered and/or redistributed for any independent commercial or non-commercial intent beyond it's original function in this project. Permissible usage of such content is restricted solely to it's express application in this repository and any forks that retain the material in it's original, unaltered form only.
+* Under no means shall the visual assets of this repository – i.e., all photo-, picto-, icono-, and videographic material – (if any) be altered and/or redistributed for any independent commercial or non-commercial intent beyond its original function in this project. Permissible usage of such content is restricted solely to its express application in this repository and any forks that retain the material in its original, unaltered form only.
