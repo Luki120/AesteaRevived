@@ -3,22 +3,17 @@
 #import <Preferences/PSTableCell.h>
 #import <AudioToolbox/AudioServices.h>
 #import <spawn.h>
-
-
-static NSString *const prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist";
-
-#define AESTintColor [UIColor colorWithRed:0.64 green:0.67 blue:1.00 alpha:1.0]
+#import "Headers/Common.h"
 
 
 @interface OBWelcomeController : UIViewController
-@property (assign, nonatomic) BOOL _shouldInlineButtontray;
 - (id)initWithTitle:(id)arg1 detailText:(id)arg2 icon:(id)arg3;
 - (void)addBulletedListItemWithTitle:(id)arg1 description:(id)arg2 image:(id)arg3;
 @end
 
 
 @interface _UIBackdropViewSettings : NSObject
-+ (id)settingsForStyle:(long long)arg1;
++ (id)settingsForStyle:(NSInteger)arg1;
 @end
 
 
@@ -52,7 +47,18 @@ static NSString *const prefsKeys = @"/var/mobile/Library/Preferences/me.luki.aes
 @end
 
 
-@interface NSDistributedNotificationCenter : NSNotificationCenter
-+ (instancetype)defaultCenter;
-- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo;
-@end
+// Reusable
+
+static void setNavBarTintColorForVC(UIViewController *self) {
+
+	self.navigationController.navigationController.navigationBar.shadowImage = [UIImage new];
+	self.navigationController.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationController.navigationBar.barTintColor = kAESTintColor;
+
+}
+
+static void nilOutNavBarTintColorForVC(UIViewController *self) {
+
+	self.navigationController.navigationController.navigationBar.barTintColor = nil;
+
+}

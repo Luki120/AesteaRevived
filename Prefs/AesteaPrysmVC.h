@@ -7,9 +7,9 @@
 @end
 
 
-@interface AESPrysmDisabledToggleColorsVC : PSListController
+@interface AESPrysmEnabledToggleColorsVC : PSListController
 @end
 
 
-@interface AESPrysmEnabledToggleColorsVC : PSListController
+@interface AESPrysmDisabledToggleColorsVC : PSListController
 @end
