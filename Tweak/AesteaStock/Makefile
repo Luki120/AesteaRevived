@@ -1,8 +1,8 @@
-TWEAK_NAME = AesteaRevived
+TWEAK_NAME = AesteaStock
 
-AesteaRevived_FILES = AesteaRevived.x
-AesteaRevived_CFLAGS = -fobjc-arc -Wno-logical-op-parentheses -Wno-c++11-extra-semi
-AesteaRevived_LIBRARIES = gcuniversal
+AesteaStock_FILES = AesteaStock.x
+AesteaStock_CFLAGS = -fobjc-arc
+AesteaStock_LIBRARIES = gcuniversal
 
 include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
