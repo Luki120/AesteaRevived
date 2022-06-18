@@ -1,7 +1,7 @@
-#import "../Headers/Headers.h"
+#import "Headers/Headers.h"
 
 
-void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
+static void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
 
 	loadPrefs();
 
@@ -21,7 +21,6 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 
 	}
 
-
 	else if([self.buttonName isEqualToString:@"Wi-Fi"]) {
 
 		if(akColorWiFiDisabledState)
@@ -37,7 +36,6 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 		else self.ccRoundButton.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
 
 	}
-
 
 	else if([self.buttonName isEqualToString:@"Bluetooth"]) {
 
@@ -55,7 +53,6 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 
 	}
 
-
 	else if([self.buttonName isEqualToString:@"Cellular"]) {
 
 		if(akColorCellularDisabledState)
@@ -72,7 +69,6 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 
 	}
 
-
 	else if([self.buttonName isEqualToString:@"Hotspot"]) {
 
 		if(akColorHotspotDisabledState)
@@ -88,7 +84,6 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 		else self.ccRoundButton.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
 
 	}
-
 
 	else if([self.buttonName isEqualToString:@"AirDrop"]) {
 
@@ -108,29 +103,24 @@ void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewController *sel
 
 }
 
+static void (*origDMTW)(CCUIRoundButton *self, SEL _cmd);
 
-void (*origDMTW)(CCUIRoundButton *self, SEL _cmd);
-
-void overrideDMTW(CCUIRoundButton *self, SEL _cmd) {
+static void overrideDMTW(CCUIRoundButton *self, SEL _cmd) {
 
 	origDMTW(self, _cmd);
 
 	UIViewController *ancestor = [self _viewControllerForAncestor];
+	if(![ancestor isKindOfClass:NSClassFromString(@"AkaraConnectivityRoundButtonViewController")]) return;
 
-	if([ancestor isKindOfClass:NSClassFromString(@"AkaraConnectivityRoundButtonViewController")])
+	for(MTMaterialView *materialView in self.subviews)
 
-		for(MTMaterialView *materialView in self.subviews)
-
-			if([materialView isKindOfClass:NSClassFromString(@"MTMaterialView")])
-
-				materialView.weighting = 0;
+		if([materialView isKindOfClass:NSClassFromString(@"MTMaterialView")]) materialView.weighting = 0;
 
 }
 
+static void (*origVDLS)(AkaraConnectivityRoundButtonViewController *self, SEL _cmd);
 
-void (*origVDLS)(AkaraConnectivityRoundButtonViewController *self, SEL _cmd);
-
-void overrideVDLS(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
+static void overrideVDLS(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
 
 	origVDLS(self, _cmd);
 
@@ -141,23 +131,20 @@ void overrideVDLS(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
 
 }
 
+static void (*origADFL)(SpringBoard *self, SEL _cmd, id);
 
-void (*origADFL)(SpringBoard *self, SEL _cmd, id app);
-
-void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
+static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 	origADFL(self, _cmd, app);
 
 	MSHookMessageEx(NSClassFromString(@"CCUIRoundButton"), @selector(didMoveToWindow), (IMP) &overrideDMTW, (IMP *) &origDMTW);
 	MSHookMessageEx(NSClassFromString(@"AkaraConnectivityRoundButtonViewController"), @selector(viewDidLayoutSubviews), (IMP) &overrideVDLS, (IMP *) &origVDLS);
 
-	class_addMethod (
-		
+	class_addMethod(		
 		NSClassFromString(@"AkaraConnectivityRoundButtonViewController"),
 		@selector(setAESAkaraToggleColors),
-		(IMP)&new_setAESAkaraToggleColors,
+		(IMP) &new_setAESAkaraToggleColors,
 		"v@:"
-
 	);
 
 }
@@ -165,7 +152,6 @@ void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 __attribute__((constructor)) static void init() {
 
 	if(isBSCInstalled || isPrysmInstalled) return;
-
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
 }

@@ -1,4 +1,4 @@
-#import "../Headers/Headers.h"
+#import "Headers/Headers.h"
 
 
 %hook CCUIRoundButton
@@ -6,14 +6,11 @@
 
 %new
 
-
 - (void)setToggleColors {
-
 
 	loadPrefs();
 
 	UIViewController *ancestor = [self _viewControllerForAncestor];
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityAirplaneViewController)]) {
 
 		if(colorOnState)
@@ -21,7 +18,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"airplaneColor" fallback:@"ff9f0a"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemOrangeColor;
-
 
 		if(colorAirplaneDisabledState)
 
@@ -31,7 +27,6 @@
 
 	}
 
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityCellularDataViewController)]) {
 
 		if(colorOnState)
@@ -39,7 +34,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"cellularColor" fallback:@"30d158"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemGreenColor;
-
 
 		if(colorCellularDisabledState)
 
@@ -50,7 +44,6 @@
 
 	}
 
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityWifiViewController)]) {
 
 		if(colorOnState)
@@ -58,7 +51,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"wifiColor" fallback:@"147efb"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
-
 
 		if(colorWiFiDisabledState)
 
@@ -68,7 +60,6 @@
 
 	}
 
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityBluetoothViewController)]) {
 
 		if(colorOnState)
@@ -76,7 +67,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"bluetoothColor" fallback:@"147efb"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
-
 
 		if(colorBluetoothDisabledState)
 
@@ -86,7 +76,6 @@
 
 	}
 
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityAirDropViewController)]) {
 
 		if(colorOnState)
@@ -94,7 +83,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"airdropColor" fallback:@"147efb"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
-
 
 		if(colorAirdropDisabledState)
 
@@ -104,7 +92,6 @@
 
 	}
 
-
 	if([ancestor isKindOfClass: %c(CCUIConnectivityHotspotViewController)]) {
 
 		if(colorOnState)
@@ -112,7 +99,6 @@
 			self.selectedStateBackgroundView.backgroundColor = [GcColorPickerUtils colorFromDefaults:@"me.luki.aestearevivedprefs" withKey:@"hotspotColor" fallback:@"147efb"];
 
 		else self.selectedStateBackgroundView.backgroundColor = UIColor.systemBlueColor;
-
 
 		if(colorHotspotDisabledState)
 
@@ -127,21 +113,16 @@
 
 - (void)didMoveToWindow { // create a notification observer && call the function we need
 
-
 	%orig;
-
 	[self setToggleColors];
 
 	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
 	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setToggleColors) name:@"toggleColorsApplied" object:nil];
 
-
 }
 
 
 %end
-
-
 
 
 // Credits to the original creator of the tweak: https://github.com/jakeajames/RealCC
@@ -152,23 +133,20 @@
 
 - (void)buttonTapped:(id)arg1 {
 
-
 	%orig;
 
-	if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WIFI_NAME" value: @"CONTROL_CENTER_STATUS_WIFI_NAME" table: @"Localizable"]] 
-		|| [self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WLAN_NAME" value: @"CONTROL_CENTER_STATUS_WLAN_NAME" table: @"Localizable"]]) {
-			
-			SBWiFiManager *wifiManager = (SBWiFiManager*)[%c(SBWiFiManager) sharedInstance];
-		
-		if([wifiManager wiFiEnabled])
-			
-			[wifiManager setWiFiEnabled: NO];
-		
+	if([self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WIFI_NAME" value:@"CONTROL_CENTER_STATUS_WIFI_NAME" table:@"Localizable"]] 
+		|| [self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WLAN_NAME" value:@"CONTROL_CENTER_STATUS_WLAN_NAME" table:@"Localizable"]]) {
+
+			SBWiFiManager *wifiManager = (SBWiFiManager *)[%c(SBWiFiManager) sharedInstance];
+
+		if([wifiManager wiFiEnabled]) [wifiManager setWiFiEnabled: NO];
+
 	}
 
 	if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" value: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" table: @"Localizable"]]) {
-			
-		BluetoothManager *bluetoothManager = (BluetoothManager*)[%c(BluetoothManager) sharedInstance];
+
+		BluetoothManager *bluetoothManager = (BluetoothManager *)[%c(BluetoothManager) sharedInstance];
 
 		BOOL enabled = [bluetoothManager enabled];
 
@@ -182,12 +160,11 @@
 		} else bluetoothEnabled = YES;
 
 	}
-	
+
 }
 
+
 %end
-
-
 
 
 %hook BluetoothManager
@@ -200,26 +177,12 @@
 
 }
 
-- (BOOL)setEnabled:(BOOL)arg1 {
 
-	return %orig(bluetoothEnabled);
-
-}
-
-- (BOOL)setPowered:(BOOL)arg1 {
-
-	return %orig(bluetoothEnabled);
-
-}
+- (BOOL)setEnabled:(BOOL)arg1 { return %orig(bluetoothEnabled); }
+- (BOOL)setPowered:(BOOL)arg1 { return %orig(bluetoothEnabled); }
 
 
 %end
 
 
-
-
-%ctor {
-
-	loadPrefs();
-
-}
+%ctor { loadPrefs(); }
