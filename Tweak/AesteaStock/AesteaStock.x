@@ -27,7 +27,7 @@
 
 	}
 
-	if([ancestor isKindOfClass: %c(CCUIConnectivityCellularDataViewController)]) {
+	else if([ancestor isKindOfClass: %c(CCUIConnectivityCellularDataViewController)]) {
 
 		if(colorOnState)
 
@@ -44,7 +44,7 @@
 
 	}
 
-	if([ancestor isKindOfClass: %c(CCUIConnectivityWifiViewController)]) {
+	else if([ancestor isKindOfClass: %c(CCUIConnectivityWifiViewController)]) {
 
 		if(colorOnState)
 
@@ -60,7 +60,7 @@
 
 	}
 
-	if([ancestor isKindOfClass: %c(CCUIConnectivityBluetoothViewController)]) {
+	else if([ancestor isKindOfClass: %c(CCUIConnectivityBluetoothViewController)]) {
 
 		if(colorOnState)
 
@@ -76,7 +76,7 @@
 
 	}
 
-	if([ancestor isKindOfClass: %c(CCUIConnectivityAirDropViewController)]) {
+	else if([ancestor isKindOfClass: %c(CCUIConnectivityAirDropViewController)]) {
 
 		if(colorOnState)
 
@@ -92,7 +92,7 @@
 
 	}
 
-	if([ancestor isKindOfClass: %c(CCUIConnectivityHotspotViewController)]) {
+	else if([ancestor isKindOfClass: %c(CCUIConnectivityHotspotViewController)]) {
 
 		if(colorOnState)
 
@@ -127,7 +127,6 @@
 
 // Credits to the original creator of the tweak: https://github.com/jakeajames/RealCC
 
-
 %hook CCUILabeledRoundButton
 
 
@@ -138,7 +137,7 @@
 	if([self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WIFI_NAME" value:@"CONTROL_CENTER_STATUS_WIFI_NAME" table:@"Localizable"]] 
 		|| [self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WLAN_NAME" value:@"CONTROL_CENTER_STATUS_WLAN_NAME" table:@"Localizable"]]) {
 
-			SBWiFiManager *wifiManager = (SBWiFiManager *)[%c(SBWiFiManager) sharedInstance];
+			SBWiFiManager *wifiManager = [%c(SBWiFiManager) sharedInstance];
 
 		if([wifiManager wiFiEnabled]) [wifiManager setWiFiEnabled: NO];
 
@@ -146,7 +145,7 @@
 
 	if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" value: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" table: @"Localizable"]]) {
 
-		BluetoothManager *bluetoothManager = (BluetoothManager *)[%c(BluetoothManager) sharedInstance];
+		BluetoothManager *bluetoothManager = [%c(BluetoothManager) sharedInstance];
 
 		BOOL enabled = [bluetoothManager enabled];
 
