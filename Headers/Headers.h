@@ -1,4 +1,3 @@
-@import UIKit;
 #import <dlfcn.h>
 #import <substrate.h>
 #import <GcUniversal/GcColorPickerUtils.h>
@@ -7,10 +6,9 @@
 
 // Global
 
-#define isAkaraInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
-#define isBSCInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
-#define isPrysmInstalled dlopen("/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib", RTLD_NOW)
-
+#define kAkaraExists dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
+#define kBSCExists dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
+#define kPrysmExists dlopen("/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib", RTLD_NOW)
 
 // Aestea Akara
 
@@ -23,7 +21,6 @@ static BOOL akColorCellularDisabledState;
 static BOOL akColorHotspotDisabledState;
 static BOOL akColorAirDropDisabledState;
 
-
 // Aestea BSC
 
 static BOOL bscColorOnState = YES;
@@ -31,7 +28,6 @@ static BOOL bscColorOnState = YES;
 static BOOL bscColorAirplaneOrCellularDisabledState;
 static BOOL bscColorWiFiDisabledState;
 static BOOL bscColorBluetoothDisabledState;
-
 
 // Aestea Prysm
 
@@ -99,7 +95,6 @@ static void loadPrefs() {
 
 }
 
-
 // Aestea Akara
 
 @interface MTMaterialView : UIView
@@ -124,7 +119,6 @@ static void loadPrefs() {
 @interface SpringBoard : UIApplication
 @end
 
-
 // Aestea BSC
 
 @interface SCButtonView : UIView
@@ -143,9 +137,7 @@ static void loadPrefs() {
 @property (nonatomic, strong) SCGroupedControlView *wifiControlView;
 @property (nonatomic, strong) SCGroupedControlView *bluetoothControlView;
 @property (nonatomic, strong) SCGroupedControlView *cellularControlView;
-- (void)updateStates;
 @end
-
 
 // Aestea Prysm
 
@@ -162,7 +154,6 @@ static void loadPrefs() {
 @property (nonatomic, strong) PrysmButtonView *airdropButton;
 @end
 
-
 // Aestea Stock
 
 @interface CCUILabeledRoundButton
@@ -172,15 +163,14 @@ static void loadPrefs() {
 
 @interface SBWiFiManager
 - (id)sharedInstance;
-- (void)setWiFiEnabled:(BOOL)enabled;
 - (BOOL)wiFiEnabled;
+- (void)setWiFiEnabled:(BOOL)enabled;
 @end
 
 
 @interface BluetoothManager
 - (id)sharedInstance;
 - (BOOL)enabled;
-- (BOOL)powered;
 - (void)setEnabled:(BOOL)enabled;
 - (void)setPowered:(BOOL)powered;
 @end

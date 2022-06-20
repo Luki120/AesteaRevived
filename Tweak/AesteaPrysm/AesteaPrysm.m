@@ -65,7 +65,7 @@ static void overrideVDLS(PrysmConnectivityModuleViewController *self, SEL _cmd) 
 
 }
 
-static void (*origADFL)(SpringBoard *self, SEL _cmd, id app);
+static void (*origADFL)(SpringBoard *self, SEL _cmd, id);
 
 static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
@@ -84,7 +84,7 @@ static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 __attribute__((constructor)) static void init() {
 
-	if(isAkaraInstalled || isBSCInstalled) return;
+	if(kAkaraExists || kBSCExists) return;
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
 }

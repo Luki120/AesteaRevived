@@ -38,7 +38,7 @@ static void new_setAESBSCToggleColors(SCGroupedControlsModuleViewController *sel
 
 }
 
-static void(*origVWA)(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated);
+static void(*origVWA)(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL);
 
 static void overrideVWA(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated) {
 
@@ -70,7 +70,7 @@ static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 __attribute__((constructor)) static void init() {
 
-	if(isAkaraInstalled || isPrysmInstalled) return;
+	if(kAkaraExists || kPrysmExists) return;
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
 }

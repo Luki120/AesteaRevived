@@ -123,7 +123,6 @@ static void (*origVDLS)(AkaraConnectivityRoundButtonViewController *self, SEL _c
 static void overrideVDLS(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
 
 	origVDLS(self, _cmd);
-
 	new_setAESAkaraToggleColors(self, _cmd);
 
 	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
@@ -151,7 +150,7 @@ static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
 
 __attribute__((constructor)) static void init() {
 
-	if(isBSCInstalled || isPrysmInstalled) return;
+	if(kBSCExists || kPrysmExists) return;
 	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
 
 }
