@@ -12,21 +12,28 @@
 
 }
 
-#pragma mark Lifecycle
 
-- (id)init {
-
-	self = [super init];
-	if(self) [self setupUI];
-	return self;
-
-}
-
+// ! Lifecycle
 
 - (NSArray *)specifiers {
 
 	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 	return _specifiers;
+
+}
+
+
+- (id)init {
+
+	self = [super init];
+	if(!self) return nil;
+
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{ registerAesteaTintCellClass(); });
+
+	[self setupUI];
+
+	return self;
 
 }
 
@@ -55,34 +62,44 @@
 
 	self.navigationItem.titleView = [UIView new];
 
-	navBarStackView = [UIStackView new];
-	navBarStackView.axis = UILayoutConstraintAxisVertical;
-	navBarStackView.spacing = 0.5;
-	navBarStackView.alignment = UIStackViewAlignmentCenter;
-	navBarStackView.distribution = UIStackViewDistributionFill;
-	navBarStackView.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.navigationItem.titleView addSubview: navBarStackView];
+	if(!navBarStackView) {
+		navBarStackView = [UIStackView new];
+		navBarStackView.axis = UILayoutConstraintAxisVertical;
+		navBarStackView.spacing = 0.5;
+		navBarStackView.alignment = UIStackViewAlignmentCenter;
+		navBarStackView.translatesAutoresizingMaskIntoConstraints = NO;
+		[self.navigationItem.titleView addSubview: navBarStackView];
+	}
 
-	iconView = [UIImageView new];
-	iconView.image = iconImage;
-	iconView.contentMode = UIViewContentModeScaleAspectFit;
-	iconView.translatesAutoresizingMaskIntoConstraints = NO;
-	[navBarStackView addArrangedSubview: iconView];
+	if(!iconView) {
+		iconView = [UIImageView new];
+		iconView.image = iconImage;
+		iconView.contentMode = UIViewContentModeScaleAspectFit;
+		iconView.translatesAutoresizingMaskIntoConstraints = NO;
+		[navBarStackView addArrangedSubview: iconView];
+	}
 
-	versionLabel = [UILabel new];
-	versionLabel.text = @"AesteaRevived 3.2";
-	versionLabel.font = [UIFont boldSystemFontOfSize:12];
-	versionLabel.textAlignment = NSTextAlignmentCenter;
-	[navBarStackView addArrangedSubview: versionLabel];
+	if(!versionLabel) {
+		versionLabel = [UILabel new];
+		versionLabel.text = @"AesteaRevived 0.9.2";
+		versionLabel.font = [UIFont boldSystemFontOfSize:12];
+		versionLabel.textAlignment = NSTextAlignmentCenter;
+		[navBarStackView addArrangedSubview: versionLabel];
+	}
 
-	headerView = [UIView new];
-	headerView.frame = CGRectMake(0,0,200,200);
-	headerImageView = [UIImageView new];
-	headerImageView.image = bannerImage;
-	headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-	headerImageView.clipsToBounds = YES;
-	headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
-	[headerView addSubview: headerImageView];
+	if(!headerView) {
+		headerView = [UIView new];
+		headerView.frame = CGRectMake(0,0,200,200);	
+	}
+
+	if(!headerImageView) {
+		headerImageView = [UIImageView new];
+		headerImageView.image = bannerImage;
+		headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+		headerImageView.clipsToBounds = YES;
+		headerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+		[headerView addSubview: headerImageView];
+	}
 
 	UIButton *changelogButton = [UIButton new];
 	changelogButton.alpha = 0.65;
@@ -115,6 +132,7 @@
 
 }
 
+// ! Selectors
 
 - (void)showWtfChangedInThisVersion {
 
@@ -123,22 +141,15 @@
 	UIImage *tweakIconImage = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/AesteaIcon.png"];
 	UIImage *checkmarkImage = [UIImage systemImageNamed:@"checkmark.circle.fill"];
 
-	changelogController = [[OBWelcomeController alloc] initWithTitle:@"AesteaRevived" detailText:@"3.2" icon:tweakIconImage];
-	[changelogController addBulletedListItemWithTitle:@"Code" description:@"Aestea is fully respringless now. All changes apply on the fly." image:checkmarkImage];
-	[changelogController addBulletedListItemWithTitle:@"General" description:@"Added full seamless Akara, Big Sur Center & Prysm support." image:checkmarkImage];
+	if(changelogController) { [self presentViewController:changelogController animated:YES completion:nil]; return; }
+	changelogController = [[OBWelcomeController alloc] initWithTitle:@"AesteaRevived" detailText:@"0.9.2" icon:tweakIconImage];
+	[changelogController addBulletedListItemWithTitle:@"Code" description:@"Refactoring ⇝ everything works the same, but better." image:checkmarkImage];
 
 	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
 
-	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings: settings];	
+	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithFrame:CGRectZero autosizesToFitSuperview:YES settings:settings];
 	backdropView.clipsToBounds = YES;
-	backdropView.layer.masksToBounds = YES;
-	backdropView.translatesAutoresizingMaskIntoConstraints = NO;
 	[changelogController.viewIfLoaded insertSubview:backdropView atIndex:0];
-
-	[backdropView.topAnchor constraintEqualToAnchor: changelogController.viewIfLoaded.topAnchor].active = YES;
-	[backdropView.bottomAnchor constraintEqualToAnchor: changelogController.viewIfLoaded.bottomAnchor].active = YES;
-	[backdropView.leadingAnchor constraintEqualToAnchor: changelogController.viewIfLoaded.leadingAnchor].active = YES;
-	[backdropView.trailingAnchor constraintEqualToAnchor: changelogController.viewIfLoaded.trailingAnchor].active = YES;
 
 	changelogController.viewIfLoaded.backgroundColor = UIColor.clearColor;
 	changelogController.view.tintColor = kAESTintColor;
@@ -156,10 +167,7 @@
 	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"AesteaRevived" message:@"Do you want to destroy this preferences and rebuild them fresh upon a respring?" preferredStyle:UIAlertControllerStyleAlert];
 	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Shoot" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 
-		NSFileManager *fileM = [NSFileManager defaultManager];
-
-		[fileM removeItemAtPath:@"/var/mobile/Library/Preferences/me.luki.aestearevivedprefs.plist" error:nil];
-
+		[[NSFileManager defaultManager] removeItemAtPath:kPath error:nil];
 		[self crossDissolveBlur];
 
 	}];
@@ -178,11 +186,9 @@
 
 	_UIBackdropViewSettings *settings = [_UIBackdropViewSettings settingsForStyle:2];
 
-	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithSettings: settings];
+	_UIBackdropView *backdropView = [[_UIBackdropView alloc] initWithFrame:CGRectZero autosizesToFitSuperview:YES settings:settings];
 	backdropView.alpha = 0;
-	backdropView.frame = self.view.bounds;
 	backdropView.clipsToBounds = YES;
-	backdropView.layer.masksToBounds = YES;
 	[self.view addSubview: backdropView];
 
 	[UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -197,18 +203,45 @@
 - (void)launchRespring {
 
 	pid_t pid;
-	const char* args[] = {"sbreload", NULL, NULL, NULL};
-	posix_spawn(&pid, "/usr/bin/sbreload", NULL, NULL, (char* const*)args, NULL);
+	const char* args[] = {"killall", "backboardd", NULL};
+	posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
 
 }
 
-
-#pragma mark Table View Data Source
+// ! UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 	tableView.tableHeaderView = headerView;
 	return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+
+}
+
+// ! Dark juju
+
+static void aestea_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
+
+	struct objc_super superSetTitle = {
+		self,
+		[self superclass]
+	};
+
+	id (*superCall)(struct objc_super *, SEL, NSString *) = (void *)objc_msgSendSuper;
+	superCall(&superSetTitle, _cmd, title);
+
+	self.titleLabel.textColor = kAESTintColor;
+	self.titleLabel.highlightedTextColor = kAESTintColor;
+
+}
+
+static void registerAesteaTintCellClass() {
+
+	Class AesteaTintCellClass = objc_allocateClassPair([PSTableCell class], "AesteaTintCell", 0);
+	Method method = class_getInstanceMethod([PSTableCell class], @selector(setTitle:));
+	const char *typeEncoding = method_getTypeEncoding(method);
+	class_addMethod(AesteaTintCellClass, @selector(setTitle:), (IMP) aestea_setTitle, typeEncoding);
+
+	objc_registerClassPair(AesteaTintCellClass);
 
 }
 
@@ -245,7 +278,6 @@
 
 @implementation AesteaLinksVC
 
-
 - (NSArray *)specifiers {
 
 	if(!_specifiers) _specifiers = [self loadSpecifiersFromPlistName:@"AesteaLinks" target:self];
@@ -270,64 +302,11 @@
 }
 
 
-- (void)launchDiscord {
+- (void)launchDiscord { [self launchURL: [NSURL URLWithString: @"https://discord.gg/jbE3avwSHs"]]; }
+- (void)launchPayPal { [self launchURL: [NSURL URLWithString: @"https://paypal.me/Luki120"]]; }
+- (void)launchGitHub { [self launchURL: [NSURL URLWithString: @"https://github.com/Luki120/AesteaRevived"]]; }
+- (void)launchIWantTranslucent { [self launchURL: [NSURL URLWithString:@"https://luki120.github.io/depictions/web/?p=me.luki.iwanttranslucent"]]; }
 
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://discord.gg/jbE3avwSHs"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchPayPal {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://paypal.me/Luki120"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchPayPalLitten {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://paypal.me/Litteeen"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchGitHub {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://github.com/Luki120/AesteaRevived"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchIWantTranslucent {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://luki120.github.io/depictions/web/?p=me.luki.iwanttranslucent"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchLune {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Lune/"] options:@{} completionHandler:nil];
-
-}
-
-
-- (void)launchRose {
-
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://repo.litten.love/depictions/Rose/"] options:@{} completionHandler:nil];
-
-}
-
-@end
-
-
-@implementation AesteaTableCell
-
-- (void)setTitle:(NSString *)t {
-
-	[super setTitle:t];
-	self.titleLabel.textColor = kAESTintColor;
-
-}
+- (void)launchURL:(NSURL *)url { [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil]; }
 
 @end

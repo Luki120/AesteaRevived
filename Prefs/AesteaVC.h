@@ -1,7 +1,8 @@
-#import <Preferences/PSListController.h>
-#import <Preferences/PSSpecifier.h>
-#import <Preferences/PSTableCell.h>
-#import <AudioToolbox/AudioServices.h>
+@import ObjectiveC.message;
+@import Preferences.PSListController;
+@import Preferences.PSSpecifier;
+@import Preferences.PSTableCell;
+@import AudioToolbox.AudioServices;
 #import <spawn.h>
 #import "Headers/Common.h"
 
@@ -18,10 +19,6 @@
 
 
 @interface _UIBackdropView : UIView
-@property (assign, nonatomic) BOOL blurRadiusSetOnce;
-@property (assign, nonatomic) double _blurRadius;
-@property (copy, nonatomic) NSString *_blurQuality;
-- (id)initWithSettings:(id)arg1;
 - (id)initWithFrame:(CGRect)arg1 autosizesToFitSuperview:(BOOL)arg2 settings:(id)arg3;
 @end
 
@@ -36,16 +33,6 @@
 
 @interface AesteaContributorsVC : PSListController
 @end
-
-
-@interface PSTableCell ()
-- (void)setTitle:(NSString *)t;
-@end
-
-
-@interface AesteaTableCell : PSTableCell
-@end
-
 
 // Reusable
 
