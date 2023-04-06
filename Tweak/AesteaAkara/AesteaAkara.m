@@ -103,8 +103,7 @@ static void new_setAESAkaraToggleColors(AkaraConnectivityRoundButtonViewControll
 
 }
 
-static void (*origDMTW)(CCUIRoundButton *self, SEL _cmd);
-
+static void (*origDMTW)(CCUIRoundButton *, SEL);
 static void overrideDMTW(CCUIRoundButton *self, SEL _cmd) {
 
 	origDMTW(self, _cmd);
@@ -118,39 +117,40 @@ static void overrideDMTW(CCUIRoundButton *self, SEL _cmd) {
 
 }
 
-static void (*origVDLS)(AkaraConnectivityRoundButtonViewController *self, SEL _cmd);
-
+static void (*origVDLS)(AkaraConnectivityRoundButtonViewController *, SEL);
 static void overrideVDLS(AkaraConnectivityRoundButtonViewController *self, SEL _cmd) {
 
 	origVDLS(self, _cmd);
 	new_setAESAkaraToggleColors(self, _cmd);
 
-	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESAkaraToggleColors) name:@"akToggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESAkaraToggleColors) name:AesteaDidApplyAkaraToggleColorsNotification object:nil];
 
 }
 
-static void (*origADFL)(SpringBoard *self, SEL _cmd, id);
+static id observer;
+static void appDidFinishLaunching() {
 
-static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
+	observer = [NSNotificationCenter.defaultCenter addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
-	origADFL(self, _cmd, app);
+		MSHookMessageEx(NSClassFromString(@"CCUIRoundButton"), @selector(didMoveToWindow), (IMP) &overrideDMTW, (IMP *) &origDMTW);
+		MSHookMessageEx(NSClassFromString(@"AkaraConnectivityRoundButtonViewController"), @selector(viewDidLayoutSubviews), (IMP) &overrideVDLS, (IMP *) &origVDLS);
 
-	MSHookMessageEx(NSClassFromString(@"CCUIRoundButton"), @selector(didMoveToWindow), (IMP) &overrideDMTW, (IMP *) &origDMTW);
-	MSHookMessageEx(NSClassFromString(@"AkaraConnectivityRoundButtonViewController"), @selector(viewDidLayoutSubviews), (IMP) &overrideVDLS, (IMP *) &origVDLS);
+		class_addMethod(		
+			NSClassFromString(@"AkaraConnectivityRoundButtonViewController"),
+			@selector(setAESAkaraToggleColors),
+			(IMP) &new_setAESAkaraToggleColors,
+			"v@:"
+		);
 
-	class_addMethod(		
-		NSClassFromString(@"AkaraConnectivityRoundButtonViewController"),
-		@selector(setAESAkaraToggleColors),
-		(IMP) &new_setAESAkaraToggleColors,
-		"v@:"
-	);
+		[NSNotificationCenter.defaultCenter removeObserver: observer];
+
+	}];
 
 }
 
 __attribute__((constructor)) static void init() {
 
 	if(kBSCExists || kPrysmExists) return;
-	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
+	appDidFinishLaunching();
 
 }

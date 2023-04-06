@@ -38,39 +38,40 @@ static void new_setAESBSCToggleColors(SCGroupedControlsModuleViewController *sel
 
 }
 
-static void(*origVWA)(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL);
-
+static void (*origVWA)(SCGroupedControlsModuleViewController *, SEL, BOOL);
 static void overrideVWA(SCGroupedControlsModuleViewController *self, SEL _cmd, BOOL animated) {
 
 	origVWA(self, _cmd, animated);
 	new_setAESBSCToggleColors(self, _cmd);
 
-	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(updateStates) name:@"bscToggleColorsApplied" object:nil];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESBSCToggleColors) name:@"bscToggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(updateStates) name:AesteaDidApplyBSCToggleColorsNotification object:nil];
+	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESBSCToggleColors) name:AesteaDidApplyBSCToggleColorsNotification object:nil];
 
 }
 
-static void (*origADFL)(SpringBoard *self, SEL _cmd, id);
+static id observer;
+static void appDidFinishLaunching() {
 
-static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
+	observer = [NSNotificationCenter.defaultCenter addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
-	origADFL(self, _cmd, app);
+		MSHookMessageEx(NSClassFromString(@"SCGroupedControlsModuleViewController"), @selector(viewWillAppear:), (IMP) &overrideVWA, (IMP *) &origVWA);
 
-	MSHookMessageEx(NSClassFromString(@"SCGroupedControlsModuleViewController"), @selector(viewWillAppear:), (IMP) &overrideVWA, (IMP *) &origVWA);
+		class_addMethod(
+			NSClassFromString(@"SCGroupedControlsModuleViewController"),
+			@selector(setAESBSCToggleColors),
+			(IMP) &new_setAESBSCToggleColors,
+			"v@:"
+		);
 
-	class_addMethod(
-		NSClassFromString(@"SCGroupedControlsModuleViewController"),
-		@selector(setAESBSCToggleColors),
-		(IMP) &new_setAESBSCToggleColors,
-		"v@:"
-	);
+		[NSNotificationCenter.defaultCenter removeObserver: observer];
+
+	}];
 
 }
 
 __attribute__((constructor)) static void init() {
 
 	if(kAkaraExists || kPrysmExists) return;
-	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
+	appDidFinishLaunching();
 
 }

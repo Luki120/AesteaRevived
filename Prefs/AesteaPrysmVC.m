@@ -1,11 +1,7 @@
 #import "AesteaPrysmVC.h"
 
 
-static void postNSNotification() {
-
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"prysmToggleColorsApplied" object:nil];
-
-}
+static const char *aestea_prysm_colors_changed = "me.luki.aestearevivedprefs/prysmColorsApplied";
 
 
 @implementation AesteaPrysmVC
@@ -49,7 +45,11 @@ static void postNSNotification() {
 - (void)viewDidLoad {
 
 	[super viewDidLoad];
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/prysmColorsApplied"), NULL, 0);
+
+	int register_token = 0;
+	notify_register_dispatch(aestea_prysm_colors_changed, &register_token, dispatch_get_main_queue(), ^(int token) {
+		[NSDistributedNotificationCenter.defaultCenter postNotificationName:AesteaDidApplyPrysmToggleColorsNotification object:nil];
+	});
 
 }
 
@@ -74,7 +74,7 @@ static void postNSNotification() {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+	return settings[specifier.properties[@"key"]] ?: specifier.properties[@"default"];
 
 }
 
@@ -86,7 +86,7 @@ static void postNSNotification() {
 	[settings setObject:value forKey:specifier.properties[@"key"]];
 	[settings writeToFile:kPath atomically:YES];
 
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"prysmToggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:AesteaDidApplyPrysmToggleColorsNotification object:nil];
 
 	[super setPreferenceValue:value specifier:specifier];
 
@@ -96,7 +96,6 @@ static void postNSNotification() {
 
 
 @implementation AESPrysmEnabledToggleColorsVC
-
 
 - (NSArray *)specifiers {
 
@@ -109,7 +108,11 @@ static void postNSNotification() {
 - (void)viewDidLoad {
 
 	[super viewDidLoad];
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)postNSNotification, CFSTR("me.luki.aestearevivedprefs/prysmColorsApplied"), NULL, 0);
+
+	int register_token = 0;
+	notify_register_dispatch(aestea_prysm_colors_changed, &register_token, dispatch_get_main_queue(), ^(int token) {
+		[NSDistributedNotificationCenter.defaultCenter postNotificationName:AesteaDidApplyPrysmToggleColorsNotification object:nil];
+	});
 
 }
 
@@ -134,7 +137,7 @@ static void postNSNotification() {
 
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+	return settings[specifier.properties[@"key"]] ?: specifier.properties[@"default"];
 
 }
 
@@ -146,7 +149,7 @@ static void postNSNotification() {
 	[settings setObject:value forKey:specifier.properties[@"key"]];
 	[settings writeToFile:kPath atomically:YES];
 
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:@"prysmToggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:AesteaDidApplyPrysmToggleColorsNotification object:nil];
 
 	[super setPreferenceValue:value specifier:specifier];
 

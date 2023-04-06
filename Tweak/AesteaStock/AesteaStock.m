@@ -1,17 +1,12 @@
 #import "Headers/Headers.h"
 
 
-%hook CCUIRoundButton
-
-
-%new
-
-- (void)setToggleColors {
+static void new_setToggleColors(CCUIRoundButton *self, SEL _cmd) {
 
 	loadPrefs();
 
 	UIViewController *ancestor = [self _viewControllerForAncestor];
-	if([ancestor isKindOfClass: %c(CCUIConnectivityAirplaneViewController)]) {
+	if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityAirplaneViewController")]) {
 
 		if(colorOnState)
 
@@ -27,7 +22,7 @@
 
 	}
 
-	else if([ancestor isKindOfClass: %c(CCUIConnectivityCellularDataViewController)]) {
+	else if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityCellularDataViewController")]) {
 
 		if(colorOnState)
 
@@ -44,7 +39,7 @@
 
 	}
 
-	else if([ancestor isKindOfClass: %c(CCUIConnectivityWifiViewController)]) {
+	else if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityWifiViewController")]) {
 
 		if(colorOnState)
 
@@ -60,7 +55,7 @@
 
 	}
 
-	else if([ancestor isKindOfClass: %c(CCUIConnectivityBluetoothViewController)]) {
+	else if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityBluetoothViewController")]) {
 
 		if(colorOnState)
 
@@ -76,7 +71,7 @@
 
 	}
 
-	else if([ancestor isKindOfClass: %c(CCUIConnectivityAirDropViewController)]) {
+	else if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityAirDropViewController")]) {
 
 		if(colorOnState)
 
@@ -92,7 +87,7 @@
 
 	}
 
-	else if([ancestor isKindOfClass: %c(CCUIConnectivityHotspotViewController)]) {
+	else if([ancestor isKindOfClass: NSClassFromString(@"CCUIConnectivityHotspotViewController")]) {
 
 		if(colorOnState)
 
@@ -110,34 +105,27 @@
 
 }
 
+static void (*origDMTW)(CCUIRoundButton *, SEL);
+static void overrideDMTW(CCUIRoundButton *self, SEL _cmd) {
 
-- (void)didMoveToWindow { // create a notification observer && call the function we need
-
-	%orig;
+	origDMTW(self, _cmd);
 	[self setToggleColors];
 
-	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setToggleColors) name:@"toggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setToggleColors) name:AesteaDidApplyToggleColorsNotification object:nil];
 
 }
 
+// Credits to the original creator of the tweak ⇝ https://github.com/jakeajames/RealCC
 
-%end
+static void (*origButtonTapped)(CCUILabeledRoundButton *, SEL, id);
+static void overrideButtonTapped(CCUILabeledRoundButton *self, SEL _cmd, id button) {
 
-
-// Credits to the original creator of the tweak: https://github.com/jakeajames/RealCC
-
-%hook CCUILabeledRoundButton
-
-
-- (void)buttonTapped:(id)arg1 {
-
-	%orig;
+	origButtonTapped(self, _cmd, button);
 
 	if([self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WIFI_NAME" value:@"CONTROL_CENTER_STATUS_WIFI_NAME" table:@"Localizable"]] 
 		|| [self.title isEqualToString:[[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_WLAN_NAME" value:@"CONTROL_CENTER_STATUS_WLAN_NAME" table:@"Localizable"]]) {
 
-			SBWiFiManager *wifiManager = [%c(SBWiFiManager) sharedInstance];
+			SBWiFiManager *wifiManager = [NSClassFromString(@"SBWiFiManager") sharedInstance];
 
 		if([wifiManager wiFiEnabled]) [wifiManager setWiFiEnabled: NO];
 
@@ -145,7 +133,7 @@
 
 	if([self.title isEqualToString: [[NSBundle bundleWithPath: @"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" value: @"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" table: @"Localizable"]]) {
 
-		BluetoothManager *bluetoothManager = [%c(BluetoothManager) sharedInstance];
+		BluetoothManager *bluetoothManager = [NSClassFromString(@"BluetoothManager") sharedInstance];
 
 		BOOL enabled = [bluetoothManager enabled];
 
@@ -156,32 +144,49 @@
 
 			bluetoothEnabled = NO;
 
-		} else bluetoothEnabled = YES;
+		}
+
+		else bluetoothEnabled = YES;
 
 	}
 
 }
 
+static BOOL (*origEnabled)(BluetoothManager *, SEL);
+static BOOL overrideEnabled(BluetoothManager *self, SEL _cmd) {
 
-%end
-
-
-%hook BluetoothManager
-
-
-- (BOOL)enabled {
-
-	bluetoothEnabled = !%orig;
-	return %orig;
+	bluetoothEnabled = !origEnabled(self, _cmd);
+	return origEnabled(self, _cmd);
 
 }
 
+static BOOL (*origSetEnabled)(BluetoothManager *, SEL, BOOL);
+static BOOL overrideSetEnabled(BluetoothManager *self, SEL _cmd, BOOL enabled) {
 
-- (BOOL)setEnabled:(BOOL)arg1 { return %orig(bluetoothEnabled); }
-- (BOOL)setPowered:(BOOL)arg1 { return %orig(bluetoothEnabled); }
+	return origSetEnabled(self, _cmd, bluetoothEnabled);
 
+}
 
-%end
+static BOOL (*origSetPowered)(BluetoothManager *, SEL, BOOL);
+static BOOL overrideSetPowered(BluetoothManager *self, SEL _cmd, BOOL powered) {
 
+	return origSetPowered(self, _cmd, bluetoothEnabled);
 
-%ctor { loadPrefs(); }
+}
+
+__attribute__((constructor)) static void init() {
+
+	MSHookMessageEx(NSClassFromString(@"CCUIRoundButton"), @selector(didMoveToWindow), (IMP) &overrideDMTW, (IMP *) &origDMTW);
+	MSHookMessageEx(NSClassFromString(@"CCUILabeledRoundButton"), @selector(buttonTapped:), (IMP) &overrideButtonTapped, (IMP *) &origButtonTapped);
+	MSHookMessageEx(NSClassFromString(@"BluetoothManager"), @selector(enabled), (IMP) &overrideEnabled, (IMP *) &origEnabled);
+	MSHookMessageEx(NSClassFromString(@"BluetoothManager"), @selector(setEnabled:), (IMP) &overrideSetEnabled, (IMP *) &origSetEnabled);
+	MSHookMessageEx(NSClassFromString(@"BluetoothManager"), @selector(setPowered:), (IMP) &overrideSetPowered, (IMP *) &origSetPowered);
+
+	class_addMethod(
+		NSClassFromString(@"CCUIRoundButton"),
+		@selector(setToggleColors),
+		(IMP) &new_setToggleColors,
+		"v@:"
+	);
+
+}

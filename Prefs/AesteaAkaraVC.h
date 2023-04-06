@@ -1,5 +1,6 @@
-#import <Preferences/PSListController.h>
-#import <Preferences/PSSpecifier.h>
+@import Preferences.PSListController;
+@import Preferences.PSSpecifier;
+#import <notify.h>
 #import "AesteaVC.h"
 
 

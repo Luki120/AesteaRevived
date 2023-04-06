@@ -1,5 +1,6 @@
+@import UIKit;
+@import CydiaSubstrate;
 #import <dlfcn.h>
-#import <substrate.h>
 #import <GcUniversal/GcColorPickerUtils.h>
 #import "Common.h"
 

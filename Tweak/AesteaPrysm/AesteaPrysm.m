@@ -53,38 +53,39 @@ static void new_setAESPrysmToggleColors(PrysmConnectivityModuleViewController *s
 
 }
 
-static void (*origVDLS)(PrysmConnectivityModuleViewController *self, SEL _cmd);
-
+static void (*origVDLS)(PrysmConnectivityModuleViewController *, SEL);
 static void overrideVDLS(PrysmConnectivityModuleViewController *self, SEL _cmd) {
 
 	origVDLS(self, _cmd);
 	new_setAESPrysmToggleColors(self, _cmd);
 
-	[NSDistributedNotificationCenter.defaultCenter removeObserver:self];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESPrysmToggleColors) name:@"prysmToggleColorsApplied" object:nil];
+	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setAESPrysmToggleColors) name:AesteaDidApplyPrysmToggleColorsNotification object:nil];
 
 }
 
-static void (*origADFL)(SpringBoard *self, SEL _cmd, id);
+static id observer;
+static void appDidFinishLaunching() {
 
-static void overrideADFL(SpringBoard *self, SEL _cmd, id app) {
+	observer = [NSNotificationCenter.defaultCenter addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
-	origADFL(self, _cmd, app);
+		MSHookMessageEx(NSClassFromString(@"PrysmConnectivityModuleViewController"), @selector(viewDidLayoutSubviews), (IMP) &overrideVDLS, (IMP *) &origVDLS);
 
-	MSHookMessageEx(NSClassFromString(@"PrysmConnectivityModuleViewController"), @selector(viewDidLayoutSubviews), (IMP) &overrideVDLS, (IMP *) &origVDLS);
+		class_addMethod(
+			NSClassFromString(@"PrysmConnectivityModuleViewController"),
+			@selector(setAESPrysmToggleColors),
+			(IMP) &new_setAESPrysmToggleColors,
+			"v@:"
+		);
 
-	class_addMethod(
-		NSClassFromString(@"PrysmConnectivityModuleViewController"),
-		@selector(setAESPrysmToggleColors),
-		(IMP) &new_setAESPrysmToggleColors,
-		"v@:"
-	);
+		[NSNotificationCenter.defaultCenter removeObserver: observer];
+
+	}];
 
 }
 
 __attribute__((constructor)) static void init() {
 
 	if(kAkaraExists || kBSCExists) return;
-	MSHookMessageEx(NSClassFromString(@"SpringBoard"), @selector(applicationDidFinishLaunching:), (IMP) &overrideADFL, (IMP *) &origADFL);
+	appDidFinishLaunching();
 
 }
