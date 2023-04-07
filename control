@@ -1,9 +1,9 @@
 Package: me.luki.aestearevived
 Name: Aestea Revived 🌊
-Depends: mobilesubstrate, preferenceloader, firmware (>= 13), com.mrgcgamer.libgcuniversal
-Version: 3.2
+Version: 0.9.2
 Architecture: iphoneos-arm
 Description: Colorize your connectivity toggles on the fly
 Maintainer: Luki
 Author: Luki
 Section: Tweaks
+Depends: mobilesubstrate, preferenceloader, firmware (>= 13), com.mrgcgamer.libgcuniversal
