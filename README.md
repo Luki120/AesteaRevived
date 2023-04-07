@@ -1,21 +1,17 @@
 # Aestea Revived
 
-![AesteaRevived](https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg)
-
-## Credits
-
-* The original creator of this tweak is [Traurige](https://github.com/Traurige). I maintain it with her consent as I started learning tweak development literally from this tweak, please respect it.
+<img src="https://twickd.com/images/c8577cb61e417dab355e253a0008628601232521.jpeg" width="300">
 
 ## Features
 
 * Color on enabled state.
 * Color on disabled state.
 * Akara, Big Sur Center & Prysm support.
-* Really disable WiFi and bluetooth toggles on tap.
+* Really disable WiFi and Bluetooth toggles on tap.
 
-## Disclaimer
+## Credits
 
-*  The tweak, with the purpose of being FOSS and lightweight, only colorizes the *connectivity* toggles, it does not colorize the CC modules nor does the tweak contain any themes you may see in the screenshot.
+* The original creator of this tweak is [Traurige](https://github.com/Traurige).
 
 ## Contributing
 
