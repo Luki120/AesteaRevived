@@ -1,6 +1,6 @@
 BUNDLE_NAME = AesteaPrefs
 
-AesteaPrefs_FILES = AesteaVC.m AesteaAkaraVC.m AesteaBSCVC.m AesteaPrysmVC.m AesteaStockVC.m
+AesteaPrefs_FILES = $(wildcard **/**/*.m)
 AesteaPrefs_CFLAGS = -fobjc-arc
 AesteaPrefs_LIBRARIES = gcuniversal
 AesteaPrefs_FRAMEWORKS = UIKit

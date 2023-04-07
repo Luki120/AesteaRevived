@@ -1,7 +1,7 @@
 @import Preferences.PSListController;
 @import Preferences.PSSpecifier;
 #import <notify.h>
-#import "AesteaVC.h"
+#import "../Core/AesteaVC.h"
 
 
 @interface AesteaAkaraVC : PSListController
