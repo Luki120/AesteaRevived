@@ -7,3 +7,6 @@ Maintainer: Luki
 Author: Luki
 Section: Tweaks
 Depends: mobilesubstrate, preferenceloader, firmware (>= 13), com.mrgcgamer.libgcuniversal
+Icon: https://raw.githubusercontent.com/Luki120/AesteaRevived/main/Prefs/Resources/Assets/AesteaIcon.png
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.aestearevived
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.aestearevived/depiction.json
