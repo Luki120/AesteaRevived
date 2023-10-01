@@ -56,8 +56,8 @@
 
 - (void)setupUI {
 
-	UIImage *iconImage = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/Aestea@2x.png"];
-	UIImage *bannerImage = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/Banner.png"];
+	UIImage *iconImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/Aestea@2x.png")];
+	UIImage *bannerImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/Banner.png")];
 	UIImage *changelogButtonImage = [UIImage systemImageNamed:@"atom"];
 
 	self.navigationItem.titleView = [UIView new];
@@ -138,7 +138,7 @@
 
 	AudioServicesPlaySystemSound(1521);
 
-	UIImage *tweakIconImage = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/AesteaIcon.png"];
+	UIImage *tweakIconImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/AesteaPrefs.bundle/Assets/AesteaIcon.png")];
 	UIImage *checkmarkImage = [UIImage systemImageNamed:@"checkmark.circle.fill"];
 
 	if(changelogController) { [self presentViewController:changelogController animated:YES completion:nil]; return; }
@@ -204,7 +204,7 @@
 
 	pid_t pid;
 	const char* args[] = {"killall", "backboardd", NULL};
-	posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+	posix_spawn(&pid, rootlessPathC("/usr/bin/killall"), NULL, NULL, (char* const*)args, NULL);
 
 }
 

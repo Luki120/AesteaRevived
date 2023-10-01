@@ -1,15 +1,15 @@
 @import UIKit;
 @import CydiaSubstrate;
+@import GcUniversal.ColorPickerUtils;
 #import <dlfcn.h>
-#import <GcUniversal/GcColorPickerUtils.h>
 #import "Common.h"
 
 
 // Global
 
-#define kAkaraExists dlopen("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib", RTLD_NOW)
-#define kBSCExists dlopen("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib", RTLD_NOW)
-#define kPrysmExists dlopen("/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib", RTLD_NOW)
+#define kAkaraExists dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/Akara.dylib"), RTLD_NOW)
+#define kBSCExists dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib"), RTLD_NOW)
+#define kPrysmExists dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib"), RTLD_NOW)
 
 // Aestea Akara
 
